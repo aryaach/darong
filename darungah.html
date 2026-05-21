@@ -1,0 +1,2713 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>آکادمی درونگاه — کشف خود</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@100;200;300;400;500;600;700;900&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --black: #0a0a0a;
+    --deep: #111111;
+    --surface: #1a1a1a;
+    --card: #222222;
+    --border: #2e2e2e;
+    --cream: #f5f0e8;
+    --cream-dim: #c8bfa8;
+    --cream-faint: #3a342a;
+    --accent: #e8dcc8;
+    --gold: #c9a96e;
+    --gold-dim: #8a6f3e;
+    --text-main: #f0ebe0;
+    --text-dim: #8a8278;
+    --text-faint: #4a4640;
+    --r: 12px;
+    --transition: 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: 'Vazirmatn', sans-serif;
+    background: var(--black);
+    color: var(--text-main);
+    overflow-x: hidden;
+    min-height: 100vh;
+  }
+
+  /* ── NOISE OVERLAY ── */
+  body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.04'/%3E%3C/svg%3E");
+    pointer-events: none;
+    z-index: 9999;
+    opacity: 0.4;
+  }
+
+  /* ── HERO ── */
+  .hero {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    padding: 60px 24px;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .hero-bg {
+    position: absolute;
+    inset: 0;
+    background:
+      radial-gradient(ellipse 80% 60% at 50% 10%, rgba(201,169,110,0.08) 0%, transparent 60%),
+      radial-gradient(ellipse 50% 40% at 20% 80%, rgba(201,169,110,0.04) 0%, transparent 50%),
+      var(--black);
+  }
+
+  .hero-ring {
+    position: absolute;
+    border-radius: 50%;
+    border: 1px solid rgba(201,169,110,0.06);
+    animation: ringPulse 6s ease-in-out infinite;
+  }
+  .hero-ring:nth-child(1) { width: 600px; height: 600px; animation-delay: 0s; }
+  .hero-ring:nth-child(2) { width: 900px; height: 900px; animation-delay: 1.5s; }
+  .hero-ring:nth-child(3) { width: 1200px; height: 1200px; animation-delay: 3s; }
+
+  @keyframes ringPulse {
+    0%, 100% { opacity: 0.3; transform: scale(1); }
+    50% { opacity: 0.7; transform: scale(1.02); }
+  }
+
+  .hero-content { position: relative; z-index: 1; }
+
+  /* ── PREMIUM LOGO ── */
+  .hero-logo-wrap {
+    margin-bottom: 44px;
+    opacity: 0;
+    animation: fadeUp 1s 0.3s forwards;
+    display: inline-flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .logo-container {
+    position: relative;
+    display: inline-block;
+  }
+
+  .logo-glow {
+    position: absolute;
+    inset: -20px;
+    background: radial-gradient(ellipse 80% 60% at 50% 50%, rgba(201,169,110,0.12), transparent 70%);
+    pointer-events: none;
+    animation: logoGlow 3s ease-in-out infinite;
+  }
+  @keyframes logoGlow {
+    0%,100% { opacity: 0.6; }
+    50% { opacity: 1; }
+  }
+
+  .logo-svg-wrap {
+    position: relative;
+    background: linear-gradient(160deg, #141410 0%, #0d0d09 100%);
+    border: 1px solid rgba(201,169,110,0.28);
+    border-radius: 14px;
+    padding: 22px 44px 18px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0;
+    box-shadow:
+      0 2px 0 rgba(201,169,110,0.12) inset,
+      0 -1px 0 rgba(0,0,0,0.8) inset,
+      0 16px 60px rgba(0,0,0,0.7),
+      0 4px 16px rgba(201,169,110,0.08);
+    overflow: hidden;
+  }
+
+  .logo-svg-wrap::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 1px;
+    background: linear-gradient(to right, transparent, rgba(201,169,110,0.5), transparent);
+  }
+
+  .logo-word-top {
+    font-size: 10px;
+    font-weight: 400;
+    letter-spacing: 10px;
+    color: rgba(201,169,110,0.75);
+    text-transform: uppercase;
+    line-height: 1;
+    margin-bottom: 6px;
+  }
+
+  .logo-word-fa {
+    font-size: clamp(44px, 9vw, 78px);
+    font-weight: 900;
+    line-height: 0.95;
+    color: #f0ebe0;
+    letter-spacing: -2px;
+    direction: rtl;
+    text-shadow: 0 2px 20px rgba(201,169,110,0.15);
+  }
+  .logo-word-fa span {
+    color: var(--gold);
+    text-shadow: 0 0 30px rgba(201,169,110,0.4);
+  }
+
+  .logo-divider {
+    width: 40px;
+    height: 1px;
+    background: linear-gradient(to right, transparent, rgba(201,169,110,0.4), transparent);
+    margin: 8px 0 7px;
+  }
+
+  .logo-word-en {
+    font-size: 10px;
+    font-weight: 300;
+    letter-spacing: 6px;
+    color: rgba(200,191,168,0.6);
+    line-height: 1;
+    text-transform: lowercase;
+  }
+
+  .hero h1 {
+    font-size: clamp(52px, 10vw, 100px);
+    font-weight: 900;
+    line-height: 0.95;
+    color: var(--cream);
+    margin-bottom: 24px;
+    opacity: 0;
+    animation: fadeUp 1s 0.45s forwards;
+    letter-spacing: -2px;
+    display: none;
+  }
+
+  .hero h1 span { color: var(--gold); }
+
+  .hero-sub {
+    font-size: clamp(14px, 2vw, 18px);
+    font-weight: 200;
+    color: var(--text-dim);
+    max-width: 480px;
+    line-height: 1.8;
+    margin: 0 auto 48px;
+    opacity: 0;
+    animation: fadeUp 1s 0.7s forwards;
+  }
+
+  .hero-cta {
+    display: inline-flex;
+    align-items: center;
+    gap: 12px;
+    background: var(--gold);
+    color: var(--black);
+    padding: 16px 36px;
+    border-radius: 100px;
+    font-size: 15px;
+    font-weight: 700;
+    cursor: pointer;
+    border: none;
+    opacity: 0;
+    animation: fadeUp 1s 0.9s forwards;
+    transition: all 0.3s;
+    text-decoration: none;
+  }
+  .hero-cta:hover { background: var(--cream); transform: translateY(-2px); box-shadow: 0 12px 40px rgba(201,169,110,0.25); }
+
+  .scroll-hint {
+    position: absolute;
+    bottom: 40px;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 8px;
+    opacity: 0;
+    animation: fadeUp 1s 1.5s forwards;
+  }
+  .scroll-hint span { font-size: 10px; letter-spacing: 4px; color: var(--text-faint); text-transform: uppercase; }
+  .scroll-line {
+    width: 1px;
+    height: 40px;
+    background: linear-gradient(to bottom, var(--gold), transparent);
+    animation: scrollLine 1.5s ease-in-out infinite;
+  }
+  @keyframes scrollLine { 0%, 100% { opacity: 0.3; transform: scaleY(1); } 50% { opacity: 1; transform: scaleY(1.2); } }
+
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(30px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  /* ── TESTS GRID ── */
+  .tests-section {
+    padding: 80px 24px;
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+
+  .section-header {
+    text-align: center;
+    margin-bottom: 60px;
+  }
+  .section-label {
+    font-size: 10px;
+    letter-spacing: 6px;
+    color: var(--gold);
+    text-transform: uppercase;
+    margin-bottom: 16px;
+    display: block;
+  }
+  .section-header h2 {
+    font-size: clamp(28px, 5vw, 48px);
+    font-weight: 700;
+    color: var(--cream);
+    line-height: 1.2;
+  }
+
+  /* ── RAIL SLIDER ── */
+  .tests-section {
+    padding: 60px 0 80px;
+    overflow: hidden;
+  }
+  .section-header {
+    text-align: center;
+    margin-bottom: 48px;
+    padding: 0 24px;
+  }
+
+  .rail-wrapper {
+    position: relative;
+    width: 100%;
+    perspective: 1200px;
+  }
+
+  /* Gradient fade edges */
+  .rail-wrapper::before,
+  .rail-wrapper::after {
+    content: '';
+    position: absolute;
+    top: 0; bottom: 0;
+    width: 160px;
+    z-index: 5;
+    pointer-events: none;
+  }
+  .rail-wrapper::before {
+    right: 0;
+    background: linear-gradient(to right, transparent, var(--black) 85%);
+  }
+  .rail-wrapper::after {
+    left: 0;
+    background: linear-gradient(to left, transparent, var(--black) 85%);
+  }
+
+  .rail-track {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    padding: 40px 50vw 48px;
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    scroll-behavior: smooth;
+    cursor: grab;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none;
+  }
+  .rail-track::-webkit-scrollbar { display: none; }
+  .rail-track.grabbing { cursor: grabbing; }
+
+  /* Arrow buttons */
+  .rail-arrow {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-60%);
+    z-index: 10;
+    width: 44px; height: 44px;
+    border-radius: 50%;
+    background: rgba(26,26,26,0.9);
+    border: 1px solid var(--border);
+    color: var(--gold);
+    font-size: 22px;
+    cursor: pointer;
+    display: flex; align-items: center; justify-content: center;
+    transition: all 0.25s;
+    backdrop-filter: blur(8px);
+  }
+  .rail-arrow:hover {
+    background: var(--cream-faint);
+    border-color: var(--gold-dim);
+    transform: translateY(-60%) scale(1.1);
+    box-shadow: 0 8px 24px rgba(0,0,0,0.5);
+  }
+  .rail-arrow-right { right: 24px; }
+  .rail-arrow-left  { left: 24px; }
+
+  /* ── RAIL DOTS ── */
+  .rail-dots {
+    display: flex;
+    justify-content: center;
+    gap: 8px;
+    padding: 0 24px;
+    margin-top: 4px;
+  }
+  .rail-dot {
+    width: 5px; height: 5px;
+    border-radius: 50%;
+    background: var(--text-faint);
+    cursor: pointer;
+    transition: all 0.35s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    border: none; padding: 0;
+  }
+  .rail-dot.active {
+    background: var(--gold);
+    width: 24px;
+    border-radius: 3px;
+  }
+
+  /* ── TEST CARD ── */
+  .test-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 22px;
+    padding: 28px 24px 24px;
+    cursor: pointer;
+    position: relative;
+    overflow: hidden;
+    flex-shrink: 0;
+    width: 240px;
+    min-height: 320px;
+    scroll-snap-align: center;
+    user-select: none;
+    display: flex;
+    flex-direction: column;
+    transition:
+      transform 0.55s cubic-bezier(0.25, 0.46, 0.45, 0.94),
+      opacity  0.55s cubic-bezier(0.25, 0.46, 0.45, 0.94),
+      border-color 0.35s,
+      box-shadow 0.45s;
+    /* far cards: 1/1.6 = 0.625 of active */
+    opacity: 0.32;
+    transform: scale(0.585);
+  }
+  .test-card.rail-active {
+    opacity: 1;
+    transform: scale(0.935); /* 0.935 / 0.585 = 1.598 ≈ 1.6× */
+    border-color: var(--gold-dim);
+    box-shadow: 0 28px 70px rgba(0,0,0,0.65), 0 0 0 1px rgba(201,169,110,0.2);
+    z-index: 2;
+  }
+  .test-card.rail-near {
+    opacity: 0.58;
+    transform: scale(0.72);
+  }
+  .test-card::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(135deg, rgba(201,169,110,0.09) 0%, transparent 55%);
+    opacity: 0;
+    transition: opacity 0.3s;
+    border-radius: 22px;
+  }
+  .test-card.rail-active::before { opacity: 1; }
+  .test-card:active { transform: scale(1.04); }
+
+  .card-icon {
+    width: 50px; height: 50px;
+    border-radius: 14px;
+    background: var(--cream-faint);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 24px;
+    margin-bottom: 18px;
+    transition: all 0.3s;
+    flex-shrink: 0;
+  }
+  .test-card.rail-active .card-icon { background: var(--gold-dim); }
+
+  .card-category {
+    font-size: 9px;
+    letter-spacing: 4px;
+    color: var(--gold);
+    text-transform: uppercase;
+    margin-bottom: 8px;
+  }
+  .card-title {
+    font-size: 17px;
+    font-weight: 700;
+    color: var(--cream);
+    margin-bottom: 10px;
+    line-height: 1.4;
+  }
+  .card-desc {
+    font-size: 12px;
+    color: var(--text-dim);
+    line-height: 1.7;
+    margin-bottom: 16px;
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    flex: 1;
+  }
+  .card-meta {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    font-size: 11px;
+    color: var(--text-faint);
+    border-top: 1px solid var(--border);
+    padding-top: 14px;
+  }
+  .card-meta span { display: flex; align-items: center; gap: 4px; }
+
+  .card-start-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    padding: 11px;
+    margin-top: 14px;
+    border-radius: 100px;
+    background: transparent;
+    border: 1px solid var(--border);
+    color: var(--text-dim);
+    font-family: 'Vazirmatn', sans-serif;
+    font-size: 13px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.25s;
+    flex-shrink: 0;
+  }
+  .test-card.rail-active .card-start-btn {
+    background: var(--gold);
+    border-color: var(--gold);
+    color: var(--black);
+  }
+  .card-start-btn:hover {
+    background: var(--gold);
+    border-color: var(--gold);
+    color: var(--black);
+  }
+
+  /* ── MODAL ── */
+  .modal-overlay {
+    position: fixed;
+    inset: 0;
+    background: var(--black);
+    z-index: 1000;
+    display: none;
+    flex-direction: column;
+    opacity: 0;
+    transition: opacity 0.4s ease;
+  }
+  .modal-overlay.open { display: flex; }
+  .modal-overlay.open.visible { opacity: 1; }
+
+  /* TOP BAR */
+  .modal-topbar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 20px 32px;
+    border-bottom: 1px solid var(--border);
+    flex-shrink: 0;
+    background: var(--deep);
+  }
+
+  .modal-topbar-left {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+  }
+
+  .modal-close {
+    width: 36px; height: 36px;
+    border-radius: 50%;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    color: var(--text-dim);
+    font-size: 16px;
+    cursor: pointer;
+    display: flex; align-items: center; justify-content: center;
+    transition: all 0.2s;
+    flex-shrink: 0;
+  }
+  .modal-close:hover { background: var(--card); color: var(--cream); border-color: var(--gold-dim); }
+
+  .modal-test-info { display: flex; flex-direction: column; gap: 2px; }
+  .modal-category {
+    font-size: 10px;
+    letter-spacing: 4px;
+    color: var(--gold);
+    text-transform: uppercase;
+  }
+  .modal-title { font-size: 16px; font-weight: 700; color: var(--cream); }
+
+  .modal-progress-wrap {
+    flex: 1;
+    max-width: 320px;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    gap: 6px;
+  }
+  .modal-q-counter {
+    font-size: 11px;
+    color: var(--text-faint);
+    letter-spacing: 1px;
+  }
+  .progress-bar-wrap {
+    width: 100%;
+    background: var(--surface);
+    border-radius: 100px;
+    height: 3px;
+    overflow: hidden;
+  }
+  .progress-bar-fill {
+    height: 100%;
+    background: linear-gradient(to left, var(--gold), var(--cream-dim));
+    border-radius: 100px;
+    transition: width 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  }
+
+  /* MAIN CONTENT AREA */
+  .modal-body {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 40px 24px;
+    overflow: hidden;
+    position: relative;
+  }
+
+  .modal-inner {
+    width: 100%;
+    max-width: 640px;
+    position: relative;
+  }
+
+  /* ── QUESTION ── */
+  .question-block {
+    display: none;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    animation: qSlideIn 0.45s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  }
+  .question-block.active { display: flex; }
+
+  @keyframes qSlideIn {
+    from { opacity: 0; transform: translateY(24px) scale(0.98); }
+    to { opacity: 1; transform: translateY(0) scale(1); }
+  }
+  @keyframes qSlideOut {
+    from { opacity: 1; transform: translateY(0); }
+    to { opacity: 0; transform: translateY(-20px); }
+  }
+
+  .q-number {
+    font-size: 10px;
+    letter-spacing: 4px;
+    color: var(--gold);
+    text-transform: uppercase;
+    margin-bottom: 20px;
+    font-weight: 600;
+  }
+  .q-text {
+    font-size: clamp(18px, 3vw, 24px);
+    font-weight: 500;
+    color: var(--cream);
+    line-height: 1.7;
+    margin-bottom: 48px;
+    max-width: 560px;
+  }
+
+  /* ── SCALE SELECTOR ── */
+  .scale-wrap {
+    width: 100%;
+    max-width: 560px;
+  }
+
+  .scale-labels {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 12px;
+    padding: 0 4px;
+  }
+  .scale-labels span {
+    font-size: 11px;
+    color: var(--text-faint);
+  }
+
+  .scale-options {
+    display: flex;
+    gap: 6px;
+    justify-content: center;
+    margin-bottom: 0;
+  }
+
+  .scale-btn {
+    flex: 1;
+    height: 56px;
+    border-radius: 12px;
+    border: 1.5px solid var(--border);
+    background: var(--surface);
+    color: var(--text-dim);
+    font-family: 'Vazirmatn', sans-serif;
+    font-size: 15px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.2s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    min-width: 0;
+  }
+
+  .scale-btn:hover {
+    border-color: var(--gold-dim);
+    color: var(--cream);
+    background: var(--card);
+    transform: translateY(-3px);
+    box-shadow: 0 8px 24px rgba(0,0,0,0.3);
+  }
+
+  .scale-btn.selected {
+    border-color: var(--gold);
+    background: linear-gradient(135deg, var(--cream-faint), rgba(201,169,110,0.12));
+    color: var(--gold);
+    box-shadow: 0 0 0 1px var(--gold), 0 8px 24px rgba(201,169,110,0.2);
+    transform: translateY(-4px) scale(1.06);
+  }
+
+  /* BOTTOM NAV */
+  .modal-footer {
+    flex-shrink: 0;
+    padding: 20px 32px 28px;
+    border-top: 1px solid var(--border);
+    background: var(--deep);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 12px;
+  }
+
+  .q-nav {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+
+  .btn-nav {
+    padding: 13px 32px;
+    border-radius: 100px;
+    border: 1px solid var(--border);
+    background: transparent;
+    color: var(--text-dim);
+    font-family: 'Vazirmatn', sans-serif;
+    font-size: 14px;
+    cursor: pointer;
+    transition: all 0.25s;
+    font-weight: 500;
+  }
+  .btn-nav:hover { border-color: var(--gold-dim); color: var(--cream); transform: translateY(-1px); }
+  .btn-nav.primary {
+    background: var(--gold);
+    color: var(--black);
+    border-color: var(--gold);
+    font-weight: 700;
+    padding: 13px 40px;
+  }
+  .btn-nav.primary:hover { background: var(--cream); border-color: var(--cream); transform: translateY(-2px); box-shadow: 0 8px 24px rgba(201,169,110,0.25); }
+  .btn-nav:disabled { opacity: 0.25; pointer-events: none; }
+
+  /* ── RESULT ── */
+  .result-block {
+    display: none;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    animation: qSlideIn 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    max-width: 560px;
+    width: 100%;
+  }
+  .result-block.active { display: flex; }
+
+  .result-emoji { font-size: 64px; margin-bottom: 20px; line-height: 1; }
+
+  .result-type {
+    font-size: 10px;
+    letter-spacing: 5px;
+    color: var(--gold);
+    text-transform: uppercase;
+    margin-bottom: 10px;
+    font-weight: 600;
+  }
+
+  .result-title {
+    font-size: clamp(28px, 5vw, 40px);
+    font-weight: 900;
+    color: var(--cream);
+    margin-bottom: 16px;
+    line-height: 1.2;
+  }
+
+  .result-score-badge {
+    display: inline-block;
+    background: var(--cream-faint);
+    border: 1px solid var(--gold-dim);
+    color: var(--gold);
+    padding: 7px 22px;
+    border-radius: 100px;
+    font-size: 12px;
+    font-weight: 700;
+    margin-bottom: 24px;
+    letter-spacing: 1px;
+  }
+
+  .result-desc {
+    font-size: 15px;
+    color: var(--text-dim);
+    line-height: 1.9;
+    max-width: 480px;
+    margin: 0 auto 28px;
+    text-align: center;
+  }
+
+  .result-traits {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    justify-content: center;
+    margin-bottom: 0;
+  }
+  .trait-tag {
+    padding: 7px 18px;
+    border-radius: 100px;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    font-size: 12px;
+    color: var(--cream-dim);
+  }
+
+  .result-actions {
+    display: flex;
+    gap: 12px;
+    justify-content: center;
+    flex-wrap: wrap;
+  }
+
+  .btn-result {
+    padding: 13px 28px;
+    border-radius: 100px;
+    font-family: 'Vazirmatn', sans-serif;
+    font-size: 14px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.2s;
+    border: 1px solid var(--border);
+    background: transparent;
+    color: var(--text-dim);
+  }
+  .btn-result:hover { border-color: var(--gold-dim); color: var(--cream); }
+  .btn-result.primary {
+    background: var(--gold);
+    color: var(--black);
+    border-color: var(--gold);
+  }
+  .btn-result.primary:hover { background: var(--cream); border-color: var(--cream); }
+
+  /* ── FOOTER ── */
+  .footer {
+    border-top: 1px solid var(--border);
+    margin-top: 80px;
+  }
+
+  /* STATS BAR */
+  .stats-bar {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0;
+    padding: 32px 24px;
+    background: var(--surface);
+    border-bottom: 1px solid var(--border);
+  }
+  .stat-item {
+    text-align: center;
+    padding: 0 40px;
+    flex: 1;
+    max-width: 160px;
+  }
+  .stat-num {
+    font-size: 28px;
+    font-weight: 900;
+    color: var(--gold);
+    letter-spacing: -1px;
+    line-height: 1;
+    margin-bottom: 6px;
+    direction: ltr;
+  }
+  .stat-label {
+    font-size: 11px;
+    color: var(--text-faint);
+    letter-spacing: 2px;
+  }
+  .stat-divider {
+    width: 1px;
+    height: 40px;
+    background: var(--border);
+    flex-shrink: 0;
+  }
+
+  /* FEEDBACK */
+  .feedback-section {
+    padding: 64px 24px 48px;
+    text-align: center;
+    max-width: 560px;
+    margin: 0 auto;
+    border-bottom: 1px solid var(--border);
+  }
+  .feedback-title {
+    font-size: 24px;
+    font-weight: 700;
+    color: var(--cream);
+    margin-bottom: 10px;
+  }
+  .feedback-sub {
+    font-size: 13px;
+    color: var(--text-dim);
+    margin-bottom: 32px;
+  }
+  .feedback-form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 16px;
+  }
+  .stars-wrap {
+    display: flex;
+    gap: 6px;
+    direction: ltr;
+  }
+  .star-btn {
+    background: none;
+    border: none;
+    font-size: 32px;
+    color: var(--text-faint);
+    cursor: pointer;
+    transition: all 0.15s;
+    padding: 4px;
+    line-height: 1;
+  }
+  .star-btn:hover, .star-btn.lit { color: var(--gold); transform: scale(1.15); }
+  .star-btn.lit { text-shadow: 0 0 12px rgba(201,169,110,0.5); }
+
+  .feedback-textarea {
+    width: 100%;
+    max-width: 480px;
+    min-height: 100px;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 14px;
+    padding: 16px 20px;
+    color: var(--cream);
+    font-family: 'Vazirmatn', sans-serif;
+    font-size: 14px;
+    resize: vertical;
+    transition: border-color 0.2s;
+    text-align: right;
+    direction: rtl;
+    line-height: 1.7;
+  }
+  .feedback-textarea::placeholder { color: var(--text-faint); }
+  .feedback-textarea:focus { outline: none; border-color: var(--gold-dim); }
+
+  .feedback-submit {
+    padding: 14px 40px;
+    border-radius: 100px;
+    background: var(--gold);
+    color: var(--black);
+    border: none;
+    font-family: 'Vazirmatn', sans-serif;
+    font-size: 15px;
+    font-weight: 700;
+    cursor: pointer;
+    transition: all 0.25s;
+  }
+  .feedback-submit:hover { background: var(--cream); transform: translateY(-2px); box-shadow: 0 8px 24px rgba(201,169,110,0.25); }
+
+  .feedback-success {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 12px;
+    color: var(--gold);
+    font-size: 15px;
+    padding: 24px;
+    animation: fadeUp 0.4s ease;
+  }
+  .success-icon {
+    width: 48px; height: 48px;
+    border-radius: 50%;
+    background: var(--cream-faint);
+    border: 1px solid var(--gold-dim);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 22px;
+    color: var(--gold);
+  }
+
+  /* FEEDBACK NAME INPUT */
+  .feedback-name {
+    width: 100%;
+    max-width: 480px;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 13px 20px;
+    color: var(--cream);
+    font-family: 'Vazirmatn', sans-serif;
+    font-size: 14px;
+    transition: border-color 0.2s;
+    text-align: right;
+    direction: rtl;
+  }
+  .feedback-name::placeholder { color: var(--text-faint); }
+  .feedback-name:focus { outline: none; border-color: var(--gold-dim); }
+
+  /* APPROVED PUBLIC LIST */
+  .approved-list {
+    margin-top: 40px;
+    width: 100%;
+    max-width: 520px;
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+    text-align: right;
+  }
+  .approved-list-title {
+    font-size: 10px;
+    letter-spacing: 4px;
+    color: var(--text-faint);
+    text-transform: uppercase;
+    margin-bottom: 4px;
+  }
+  .ap-item {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 16px;
+    padding: 18px 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    animation: fadeUp 0.35s ease;
+  }
+  .ap-header { display: flex; align-items: center; justify-content: space-between; gap: 12px; }
+  .ap-name { font-size: 14px; font-weight: 700; color: var(--cream); }
+  .ap-right { display: flex; align-items: center; gap: 10px; }
+  .ap-stars { color: var(--gold); font-size: 12px; direction: ltr; }
+  .ap-date { font-size: 10px; color: var(--text-faint); }
+  .ap-text { font-size: 13px; color: var(--text-dim); line-height: 1.8; }
+
+  /* ADMIN TRIGGER BTN */
+  .admin-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 7px;
+    background: transparent;
+    border: 1px solid var(--border);
+    border-radius: 100px;
+    padding: 8px 16px;
+    color: var(--text-faint);
+    font-family: 'Vazirmatn', sans-serif;
+    font-size: 12px;
+    cursor: pointer;
+    transition: all 0.2s;
+  }
+  .admin-btn:hover { border-color: var(--gold-dim); color: var(--gold); }
+
+  /* FOOTER BOTTOM */
+  .footer-bottom {
+    padding: 40px 24px;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 16px;
+  }
+  .footer-logo-text { font-size: 22px; font-weight: 900; color: var(--gold); }
+  .footer-links { display: flex; gap: 12px; align-items: center; flex-wrap: wrap; justify-content: center; }
+  .insta-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    color: var(--text-dim);
+    text-decoration: none;
+    font-size: 13px;
+    border: 1px solid var(--border);
+    border-radius: 100px;
+    padding: 8px 18px;
+    transition: all 0.25s;
+  }
+  .insta-link:hover { color: var(--cream); border-color: var(--gold-dim); background: var(--cream-faint); }
+  .footer-copy { font-size: 12px; color: var(--text-faint); }
+
+  /* ── ADMIN PANEL ── */
+  .admin-overlay {
+    position: fixed;
+    inset: 0;
+    background: rgba(0,0,0,0.88);
+    z-index: 2000;
+    display: none;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+    backdrop-filter: blur(10px);
+    opacity: 0;
+    transition: opacity 0.35s;
+  }
+  .admin-overlay.open { display: flex; }
+  .admin-overlay.open.visible { opacity: 1; }
+
+  .admin-panel {
+    background: var(--deep);
+    border: 1px solid var(--border);
+    border-radius: 20px;
+    width: 100%;
+    max-width: 720px;
+    max-height: 88vh;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+    transform: scale(0.93) translateY(16px);
+    transition: transform 0.4s cubic-bezier(0.34, 1.4, 0.64, 1);
+  }
+  .admin-overlay.open.visible .admin-panel { transform: scale(1) translateY(0); }
+
+  .admin-header {
+    padding: 22px 28px;
+    border-bottom: 1px solid var(--border);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background: var(--surface);
+    flex-shrink: 0;
+  }
+  .admin-header-left { display: flex; flex-direction: column; gap: 2px; }
+  .admin-badge { font-size: 9px; letter-spacing: 5px; color: var(--gold); text-transform: uppercase; }
+  .admin-title { font-size: 20px; font-weight: 800; color: var(--cream); }
+
+  .admin-tabs {
+    display: flex;
+    border-bottom: 1px solid var(--border);
+    padding: 0 8px;
+    flex-shrink: 0;
+    overflow-x: auto;
+    scrollbar-width: none;
+  }
+  .admin-tabs::-webkit-scrollbar { display: none; }
+  .atab {
+    padding: 14px 18px;
+    background: none;
+    border: none;
+    border-bottom: 2px solid transparent;
+    color: var(--text-faint);
+    font-family: 'Vazirmatn', sans-serif;
+    font-size: 13px;
+    cursor: pointer;
+    transition: all 0.2s;
+    white-space: nowrap;
+    display: flex;
+    align-items: center;
+    gap: 7px;
+  }
+  .atab:hover { color: var(--cream); }
+  .atab.active { color: var(--gold); border-bottom-color: var(--gold); }
+
+  .badge {
+    background: var(--cream-faint);
+    color: var(--text-dim);
+    border-radius: 100px;
+    padding: 2px 8px;
+    font-size: 11px;
+    font-weight: 700;
+  }
+  .badge-green { background: rgba(80,180,100,0.15); color: #6eca7a; }
+  .badge-red   { background: rgba(220,80,80,0.15);  color: #e87c6e; }
+
+  .admin-body {
+    flex: 1;
+    overflow-y: auto;
+    padding: 20px;
+    scrollbar-width: thin;
+    scrollbar-color: var(--border) transparent;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+  }
+  .admin-body::-webkit-scrollbar { width: 4px; }
+  .admin-body::-webkit-scrollbar-thumb { background: var(--border); border-radius: 4px; }
+
+  .ac-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 14px;
+    padding: 18px 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    animation: fadeUp 0.3s ease;
+    transition: border-color 0.2s;
+  }
+  .ac-card.ac-approved { border-color: rgba(80,180,100,0.3); }
+  .ac-card.ac-rejected { border-color: rgba(220,80,80,0.2); opacity: 0.6; }
+
+  .ac-top { display: flex; align-items: flex-start; justify-content: space-between; gap: 12px; }
+  .ac-info { display: flex; flex-direction: column; gap: 5px; }
+  .ac-name { font-size: 15px; font-weight: 700; color: var(--cream); }
+  .ac-meta { display: flex; gap: 10px; align-items: center; flex-wrap: wrap; }
+  .ac-stars { color: var(--gold); font-size: 12px; direction: ltr; }
+  .ac-date  { font-size: 10px; color: var(--text-faint); }
+  .ac-status {
+    font-size: 10px; padding: 3px 10px; border-radius: 100px; font-weight: 700; letter-spacing: 1px;
+  }
+  .ac-status.pending  { background: rgba(201,169,110,0.12); color: var(--gold); }
+  .ac-status.approved { background: rgba(80,180,100,0.15);  color: #6eca7a; }
+  .ac-status.rejected { background: rgba(220,80,80,0.15);   color: #e87c6e; }
+
+  .ac-text { font-size: 13px; color: var(--text-dim); line-height: 1.8; text-align: right; }
+
+  .ac-actions { display: flex; gap: 8px; justify-content: flex-end; flex-wrap: wrap; }
+  .ac-btn {
+    padding: 7px 16px;
+    border-radius: 100px;
+    font-family: 'Vazirmatn', sans-serif;
+    font-size: 12px;
+    font-weight: 600;
+    cursor: pointer;
+    border: 1px solid var(--border);
+    background: transparent;
+    color: var(--text-dim);
+    transition: all 0.2s;
+  }
+  .ac-btn.approve { background: rgba(80,180,100,0.1); border-color: rgba(80,180,100,0.3); color: #6eca7a; }
+  .ac-btn.approve:hover { background: rgba(80,180,100,0.22); }
+  .ac-btn.reject  { background: rgba(220,80,80,0.08); border-color: rgba(220,80,80,0.25); color: #e87c6e; }
+  .ac-btn.reject:hover  { background: rgba(220,80,80,0.18); }
+  .ac-btn.delete:hover  { color: #e87c6e; border-color: rgba(220,80,80,0.3); }
+
+  .admin-stats-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 12px;
+  }
+  .as-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 14px;
+    padding: 24px;
+    text-align: center;
+  }
+  .as-num { font-size: 36px; font-weight: 900; color: var(--gold); letter-spacing: -2px; direction: ltr; margin-bottom: 8px; }
+  .as-label { font-size: 12px; color: var(--text-faint); letter-spacing: 2px; }
+  .as-reset {
+    grid-column: span 2; padding: 12px; border-radius: 12px;
+    background: transparent; border: 1px solid var(--border);
+    color: var(--text-faint); font-family: 'Vazirmatn', sans-serif;
+    font-size: 13px; cursor: pointer; transition: all 0.2s;
+  }
+  .as-reset:hover { border-color: rgba(220,80,80,0.4); color: #e87c6e; }
+
+  .admin-empty {
+    text-align: center; padding: 60px 20px; color: var(--text-faint);
+    font-size: 14px; display: flex; flex-direction: column; align-items: center; gap: 12px;
+  }
+  .admin-empty-icon { font-size: 40px; opacity: 0.35; }
+
+  /* ── Q&A SECTION ── */
+  .qa-section {
+    padding: 80px 24px 60px;
+    background: var(--deep);
+    border-top: 1px solid var(--border);
+  }
+  .qa-inner {
+    max-width: 720px;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  .qa-title {
+    font-size: clamp(24px, 4vw, 36px);
+    font-weight: 800;
+    color: var(--cream);
+    margin-bottom: 12px;
+    text-align: center;
+  }
+  .qa-sub {
+    font-size: 14px;
+    color: var(--text-dim);
+    margin-bottom: 36px;
+    text-align: center;
+    line-height: 1.7;
+  }
+
+  .qa-chat {
+    width: 100%;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 20px;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    max-height: 400px;
+    overflow-y: auto;
+    margin-bottom: 16px;
+    scrollbar-width: thin;
+    scrollbar-color: var(--border) transparent;
+  }
+  .qa-chat::-webkit-scrollbar { width: 4px; }
+  .qa-chat::-webkit-scrollbar-thumb { background: var(--border); border-radius: 4px; }
+
+  .qa-msg {
+    display: flex;
+    gap: 12px;
+    align-items: flex-start;
+    animation: fadeUp 0.35s ease;
+  }
+  .qa-msg-user { flex-direction: row-reverse; }
+
+  .qa-avatar {
+    width: 36px; height: 36px;
+    border-radius: 50%;
+    background: var(--cream-faint);
+    border: 1px solid var(--border);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 14px; font-weight: 800;
+    color: var(--gold);
+    flex-shrink: 0;
+  }
+  .qa-msg-user .qa-avatar {
+    background: var(--gold);
+    color: var(--black);
+    border-color: var(--gold);
+  }
+
+  .qa-bubble {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 16px 16px 16px 4px;
+    padding: 14px 18px;
+    font-size: 14px;
+    color: var(--cream);
+    line-height: 1.8;
+    max-width: calc(100% - 56px);
+    direction: rtl;
+    text-align: right;
+  }
+  .qa-msg-user .qa-bubble {
+    background: var(--cream-faint);
+    border-color: rgba(201,169,110,0.15);
+    border-radius: 16px 16px 4px 16px;
+    color: var(--cream);
+  }
+
+  .qa-typing {
+    display: flex;
+    gap: 5px;
+    padding: 4px 0;
+    align-items: center;
+  }
+  .qa-dot {
+    width: 7px; height: 7px;
+    border-radius: 50%;
+    background: var(--gold);
+    opacity: 0.5;
+    animation: qaDot 1.2s ease-in-out infinite;
+  }
+  .qa-dot:nth-child(2) { animation-delay: 0.2s; }
+  .qa-dot:nth-child(3) { animation-delay: 0.4s; }
+  @keyframes qaDot {
+    0%,80%,100% { transform: scale(0.7); opacity: 0.3; }
+    40% { transform: scale(1); opacity: 1; }
+  }
+
+  .qa-input-wrap {
+    width: 100%;
+    display: flex;
+    gap: 10px;
+    align-items: flex-end;
+  }
+  .qa-input {
+    flex: 1;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 16px;
+    padding: 14px 20px;
+    color: var(--cream);
+    font-family: 'Vazirmatn', sans-serif;
+    font-size: 14px;
+    resize: none;
+    transition: border-color 0.2s;
+    direction: rtl;
+    text-align: right;
+    line-height: 1.6;
+    max-height: 160px;
+    overflow-y: auto;
+  }
+  .qa-input::placeholder { color: var(--text-faint); }
+  .qa-input:focus { outline: none; border-color: var(--gold-dim); }
+
+  .qa-send {
+    width: 48px; height: 48px;
+    border-radius: 14px;
+    background: var(--gold);
+    color: var(--black);
+    border: none;
+    cursor: pointer;
+    display: flex; align-items: center; justify-content: center;
+    transition: all 0.2s;
+    flex-shrink: 0;
+  }
+  .qa-send:hover { background: var(--cream); transform: scale(1.06); }
+  .qa-send:disabled { opacity: 0.4; pointer-events: none; }
+
+  .qa-hint {
+    font-size: 11px;
+    color: var(--text-faint);
+    margin-top: 8px;
+    letter-spacing: 0.5px;
+  }
+
+  .qa-name-row {
+    width: 100%;
+    margin-bottom: 12px;
+  }
+  .qa-name-input {
+    width: 100%;
+    max-width: 300px;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 11px 18px;
+    color: var(--cream);
+    font-family: 'Vazirmatn', sans-serif;
+    font-size: 13px;
+    direction: rtl;
+    text-align: right;
+    transition: border-color 0.2s;
+  }
+  .qa-name-input::placeholder { color: var(--text-faint); }
+  .qa-name-input:focus { outline: none; border-color: var(--gold-dim); }
+
+  /* ── UNANSWERED WARNING ── */
+  .warn-msg {
+    text-align: center;
+    color: #e8896e;
+    font-size: 12px;
+    display: none;
+    position: absolute;
+    top: -28px;
+    left: 50%;
+    transform: translateX(-50%);
+    white-space: nowrap;
+    letter-spacing: 0.5px;
+  }
+  .warn-msg.show { display: block; animation: fadeUp 0.3s ease; }
+
+  .modal-footer { position: relative; }
+
+</style>
+</head>
+<body>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-bg"></div>
+  <div class="hero-ring"></div>
+  <div class="hero-ring"></div>
+  <div class="hero-ring"></div>
+  <div class="hero-content">
+    <div class="hero-logo-wrap">
+      <div class="logo-container">
+        <div class="logo-glow"></div>
+        <div class="logo-svg-wrap">
+          <div class="logo-word-top">آکادمی</div>
+          <div class="logo-word-fa">درون<span>گاه</span></div>
+          <div class="logo-divider"></div>
+          <div class="logo-word-en">darongah academy</div>
+        </div>
+      </div>
+    </div>
+    <p class="hero-sub">سفری به عمق ذهن و روان خود. ده تست روانشناسی علمی برای شناخت بهتر خودتان.</p>
+    <button class="hero-cta" onclick="document.getElementById('tests').scrollIntoView({behavior:'smooth', block:'start'})">شروع کنید ←</button>
+  </div>
+  <div class="scroll-hint">
+    <div class="scroll-line"></div>
+  </div>
+</section>
+
+<!-- TESTS RAIL -->
+<section class="tests-section" id="tests">
+  <div class="section-header">
+    <span class="section-label">آزمون‌ها</span>
+    <h2>تست‌های روانشناسی</h2>
+  </div>
+
+  <div class="rail-wrapper">
+    <button class="rail-arrow rail-arrow-right" id="railRight" onclick="scrollRail(-1)" aria-label="راست">&#8250;</button>
+    <button class="rail-arrow rail-arrow-left" id="railLeft" onclick="scrollRail(1)" aria-label="چپ">&#8249;</button>
+
+    <div class="rail-track" id="railTrack">
+      <!-- cards injected by JS -->
+    </div>
+  </div>
+
+  <div class="rail-dots" id="railDots"></div>
+</section>
+
+<!-- Q&A SECTION -->
+<section class="qa-section" id="qa">
+  <div class="qa-inner">
+    <span class="section-label">مشاور روانشناسی</span>
+    <h2 class="qa-title">سؤالت رو بپرس</h2>
+    <p class="qa-sub">هر سؤالی درباره روانشناسی، روابط، کار، یا خودشناسی داری — اینجا بپرس</p>
+
+    <div class="qa-name-row">
+      <input class="qa-name-input" id="qaName" type="text" placeholder="اسمت رو بنویس (اختیاری)" maxlength="40">
+    </div>
+
+    <div class="qa-chat" id="qaChat">
+      <div class="qa-msg qa-msg-ai">
+        <div class="qa-avatar">د</div>
+        <div class="qa-bubble">سلام! من دستیار روانشناسی آکادمی درونگاهم 🌿<br><br>می‌تونی هر سؤالی درباره روانشناسی، روابط، اضطراب، عزت‌نفس، کار، یا شناخت خودت بپرسی. اینجا فضای امنیه — بپرس!</div>
+      </div>
+    </div>
+
+    <div class="qa-input-wrap">
+      <textarea class="qa-input" id="qaInput" placeholder="سؤالت رو بنویس..." rows="1" oninput="autoResize(this)" onkeydown="qaKeyDown(event)"></textarea>
+      <button class="qa-send" id="qaSend" onclick="sendQA()">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg>
+      </button>
+    </div>
+    <div class="qa-hint">Enter برای ارسال — Shift+Enter برای خط جدید</div>
+  </div>
+</section>
+
+<div class="footer">
+  <!-- STATS BAR -->
+  <div class="stats-bar">
+    <div class="stat-item">
+      <div class="stat-num" id="statVisits">—</div>
+      <div class="stat-label">بازدید کل</div>
+    </div>
+    <div class="stat-divider"></div>
+    <div class="stat-item">
+      <div class="stat-num" id="statToday">—</div>
+      <div class="stat-label">امروز</div>
+    </div>
+    <div class="stat-divider"></div>
+    <div class="stat-item">
+      <div class="stat-num" id="statTests">—</div>
+      <div class="stat-label">تست انجام‌شده</div>
+    </div>
+    <div class="stat-divider"></div>
+    <div class="stat-item">
+      <div class="stat-num" id="statFeedbacks">—</div>
+      <div class="stat-label">بازخورد</div>
+    </div>
+  </div>
+
+  <!-- FEEDBACK SECTION -->
+  <div class="feedback-section">
+    <span class="section-label">نظرات شما</span>
+    <h3 class="feedback-title">نظر و پیشنهاد شما</h3>
+    <p class="feedback-sub">تجربه‌ات رو با ما در میان بذار — نظرت برامون مهمه</p>
+
+    <div class="feedback-form" id="feedbackForm">
+      <input class="feedback-name" id="feedbackName" type="text" placeholder="اسمت رو بنویس..." maxlength="40">
+      <div class="stars-wrap" id="starsWrap">
+        <button class="star-btn" data-v="1">★</button>
+        <button class="star-btn" data-v="2">★</button>
+        <button class="star-btn" data-v="3">★</button>
+        <button class="star-btn" data-v="4">★</button>
+        <button class="star-btn" data-v="5">★</button>
+      </div>
+      <textarea class="feedback-textarea" id="feedbackText" placeholder="نظر یا پیشنهادت رو بنویس..."></textarea>
+      <button class="feedback-submit" onclick="submitFeedback()">ثبت نظر ✦</button>
+    </div>
+
+    <div class="feedback-success" id="feedbackSuccess" style="display:none">
+      <div class="success-icon">✓</div>
+      <div>ممنون! نظرت ثبت شد و بعد از تأیید نمایش داده می‌شه.</div>
+    </div>
+
+    <!-- PUBLIC APPROVED FEEDBACK LIST -->
+    <div class="approved-list" id="approvedList"></div>
+  </div>
+
+  <!-- FOOTER BOTTOM -->
+  <div class="footer-bottom">
+    <div class="footer-logo-text">آکادمی درونگاه</div>
+    <div class="footer-links">
+      <a href="https://www.instagram.com/darongah_/" target="_blank" class="insta-link" rel="noopener">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+          <rect x="2" y="2" width="20" height="20" rx="5" ry="5"/>
+          <circle cx="12" cy="12" r="4.5"/>
+          <circle cx="17.5" cy="6.5" r="1" fill="currentColor" stroke="none"/>
+        </svg>
+        darongah_
+      </a>
+      <button class="admin-btn" onclick="openAdminPanel()">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2l3 7h7l-5.5 4 2 7L12 16l-6.5 4 2-7L2 9h7z"/></svg>
+        پنل مدیریت
+      </button>
+    </div>
+    <p class="footer-copy">© ۱۴۰۴ — تمام تست‌ها جنبه سرگرمی دارند و جایگزین مشاوره حرفه‌ای نمی‌شوند.</p>
+  </div>
+</div>
+
+<!-- ADMIN PANEL -->
+<div class="admin-overlay" id="adminOverlay">
+  <div class="admin-panel" id="adminPanel">
+    <div class="admin-header">
+      <div class="admin-header-left">
+        <div class="admin-badge">پنل مدیریت</div>
+        <div class="admin-title">درونگاه</div>
+      </div>
+      <button class="modal-close" onclick="closeAdminPanel()">✕</button>
+    </div>
+
+    <!-- ADMIN TABS -->
+    <div class="admin-tabs">
+      <button class="atab active" data-tab="pending" onclick="switchTab('pending')">در انتظار <span class="badge" id="badgePending">0</span></button>
+      <button class="atab" data-tab="approved" onclick="switchTab('approved')">تأیید شده <span class="badge badge-green" id="badgeApproved">0</span></button>
+      <button class="atab" data-tab="rejected" onclick="switchTab('rejected')">رد شده <span class="badge badge-red" id="badgeRejected">0</span></button>
+      <button class="atab" data-tab="convos" onclick="switchTab('convos')">مکالمات <span class="badge" id="badgeConvos">0</span></button>
+      <button class="atab" data-tab="stats" onclick="switchTab('stats')">آمار</button>
+    </div>
+
+    <div class="admin-body" id="adminBody"></div>
+  </div>
+</div>
+
+<!-- MODAL -->
+<div class="modal-overlay" id="modalOverlay">
+  <!-- TOP BAR -->
+  <div class="modal-topbar">
+    <div class="modal-topbar-left">
+      <button class="modal-close" onclick="closeModal()">✕</button>
+      <div class="modal-test-info">
+        <div class="modal-category" id="modalCategory"></div>
+        <div class="modal-title" id="modalTitle"></div>
+      </div>
+    </div>
+    <div class="modal-progress-wrap">
+      <div class="modal-q-counter" id="modalQCounter"></div>
+      <div class="progress-bar-wrap">
+        <div class="progress-bar-fill" id="progressFill" style="width:0%"></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- MAIN AREA -->
+  <div class="modal-body">
+    <div class="modal-inner">
+      <div id="questionsContainer"></div>
+      <div class="result-block" id="resultBlock">
+        <div class="result-emoji" id="resultEmoji"></div>
+        <div class="result-type" id="resultType"></div>
+        <div class="result-title" id="resultTitle"></div>
+        <div class="result-score-badge" id="resultScore"></div>
+        <div class="result-desc" id="resultDesc"></div>
+        <div class="result-traits" id="resultTraits"></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- FOOTER NAV -->
+  <div class="modal-footer" id="modalFooter">
+    <div class="warn-msg" id="warnMsg">لطفاً یک گزینه انتخاب کنید</div>
+    <div class="q-nav" id="qNav">
+      <button class="btn-nav" id="btnPrev" onclick="prevQ()" disabled>← قبلی</button>
+      <button class="btn-nav primary" id="btnNext" onclick="nextQ()">بعدی ←</button>
+    </div>
+    <div class="result-actions" id="resultActions" style="display:none">
+      <button class="btn-result" onclick="retakeTest()">تکرار تست</button>
+      <button class="btn-result primary" onclick="closeModal()">بازگشت به تست‌ها</button>
+    </div>
+  </div>
+</div>
+
+<script>
+const TESTS = [
+  {
+    id: 1,
+    icon: "🧭",
+    category: "شخصیت",
+    title: "درونگرا یا برونگرا؟",
+    desc: "این تست نشان می‌دهد شما انرژی خود را از محیط بیرون می‌گیرید یا از دنیای درون.",
+    questions: 7,
+    time: "۵ دقیقه",
+    qs: [
+      "بعد از یک مهمانی شلوغ، معمولاً احساس خستگی می‌کنم.",
+      "ترجیح می‌دهم با یک دوست صمیمی وقت بگذرانم تا در جمع بزرگ.",
+      "وقتی مشکلی دارم، ابتدا با خودم کار می‌کنم قبل از اینکه با دیگران حرف بزنم.",
+      "در مکالمات گروهی بیشتر گوش می‌دهم تا صحبت می‌کنم.",
+      "به تنها بودن برای شارژ انرژی نیاز دارم.",
+      "افکار و احساساتم را به‌ندرت با دیگران در میان می‌گذارم.",
+      "ملاقات با آدم‌های جدید برایم خسته‌کننده‌تر از هیجان‌انگیز است."
+    ],
+    scale: ["اصلاً", "خیلی کم", "کم", "متوسط", "زیاد", "خیلی زیاد", "کاملاً"],
+    results: [
+      { range: [7, 21], emoji: "🌟", type: "برونگرای کامل", title: "روح اجتماعی", desc: "شما یک برونگرای واقعی هستید. انرژی‌تان از تعامل با دیگران تجدید می‌شود. در محیط‌های اجتماعی درخشان هستید و توانایی ایجاد ارتباط سریع با آدم‌های جدید را دارید. معمولاً پرانرژی، پرحرارت و عملگرا هستید.", traits: ["اجتماعی", "پرانرژی", "رهبری", "ارتباط‌ساز"] },
+      { range: [22, 31], emoji: "⚡", type: "برونگرای میانه", title: "انعطاف‌پذیر اجتماعی", desc: "شما بیشتر به سمت برونگرایی تمایل دارید اما تنهایی هم برایتان ارزش دارد. در موقعیت‌های اجتماعی خوب عمل می‌کنید ولی گاهی به فضای شخصی نیاز دارید.", traits: ["انعطاف‌پذیر", "اجتماعی", "متعادل", "سازگار"] },
+      { range: [32, 38], emoji: "🌓", type: "آمبی‌ورت", title: "موجودیت دوگانه", desc: "شما در میانه‌ی طیف قرار دارید — نه کاملاً درونگرا، نه کاملاً برونگرا. این یک ویژگی نادر و ارزشمند است. بسته به موقعیت، هر دو حالت را نشان می‌دهید.", traits: ["انعطاف‌پذیر", "همه‌جانبه", "تطبیق‌پذیر", "اصیل"] },
+      { range: [39, 46], emoji: "🌙", type: "درونگرای میانه", title: "ژرف‌اندیش", desc: "شما به سمت درونگرایی تمایل دارید. از عمق روابط لذت می‌برید، فکر می‌کنید قبل از صحبت کردن، و تنهایی برایتان مایه‌ی آرامش است.", traits: ["ژرف‌اندیش", "خودآگاه", "خلاق", "مستقل"] },
+      { range: [47, 49], emoji: "🔮", type: "درونگرای کامل", title: "دنیای درون", desc: "شما یک درونگرای عمیق هستید. دنیای درونی‌تان بسیار غنی است. روابط معنادار را به تعاملات سطحی ترجیح می‌دهید و بهترین کارها را در سکوت و تنهایی انجام می‌دهید.", traits: ["خلاق", "ژرف‌نگر", "وفادار", "متفکر"] }
+    ]
+  },
+  {
+    id: 2,
+    icon: "❤️",
+    category: "روابط عاشقانه",
+    title: "سبک دلبستگی عاشقانه",
+    desc: "الگوی دلبستگی شما در روابط عاطفی چگونه است؟ ایمن، دلواپس، اجتنابی یا آشفته؟",
+    questions: 7,
+    time: "۶ دقیقه",
+    qs: [
+      "نگران این هستم که شریک عاطفی‌ام به اندازه کافی به من علاقه ندارد.",
+      "وقتی در رابطه‌ام نزدیکی زیادی احساس می‌کنم، احساس ناراحتی می‌کنم.",
+      "برایم آسان است که به شریک عاطفی‌ام اعتماد کنم.",
+      "وقتی شریکم در دسترس نیست، اضطراب شدیدی احساس می‌کنم.",
+      "ترجیح می‌دهم به جای وابستگی عاطفی، استقلال خود را حفظ کنم.",
+      "از بیان احساسات صمیمانه‌ام در رابطه راحت هستم.",
+      "می‌ترسم شریکم مرا ترک کند حتی وقتی همه چیز خوب است."
+    ],
+    scale: ["اصلاً", "خیلی کم", "کم", "متوسط", "زیاد", "خیلی زیاد", "کاملاً"],
+    results: [
+      { range: [7, 20], emoji: "🏠", type: "دلبستگی ایمن", title: "پایه‌ی محکم", desc: "شما سبک دلبستگی ایمن دارید. در رابطه‌ها راحت هستید، به شریکتان اعتماد می‌کنید و از نزدیکی عاطفی نمی‌ترسید. این سبک سالم‌ترین نوع دلبستگی است.", traits: ["اعتماد", "آرامش", "صداقت", "ثبات"] },
+      { range: [21, 29], emoji: "🌊", type: "دلبستگی دلواپس", title: "عشق نگران", desc: "شما گاهی در روابط دلواپسی دارید. ممکن است از ترک شدن بترسید یا نیاز به اطمینان‌بخشی مداوم داشته باشید. این ریشه در تجربیات اولیه دارد و قابل تغییر است.", traits: ["حساس", "عمیق", "محبت‌کار", "نیازمند تأیید"] },
+      { range: [30, 38], emoji: "🧊", type: "دلبستگی اجتنابی", title: "فاصله‌ی ایمن", desc: "شما تمایل دارید از صمیمیت عاطفی فاصله بگیرید. استقلال برایتان مهم‌تر از وابستگی است. این الگو اغلب برای محافظت از خود در برابر آسیب است.", traits: ["مستقل", "خودکفا", "کنترل‌گر", "محتاط"] },
+      { range: [39, 45], emoji: "🌪️", type: "دلبستگی آشفته", title: "تضاد درونی", desc: "شما بین نزدیکی و فاصله در نوسان هستید. هم می‌خواهید کسی نزدیک باشد هم می‌ترسید. این سبک اغلب از تجربیات پیچیده‌ی گذشته ناشی می‌شود.", traits: ["پیچیده", "حساس", "عمیق", "متناقض"] },
+      { range: [46, 49], emoji: "🔄", type: "در حال تغییر", title: "مسیر رشد", desc: "الگوهای دلبستگی شما در حال تحول است. شما در موقعیت‌های مختلف واکنش‌های متفاوتی نشان می‌دهید. این نشانه‌ی رشد و یادگیری است.", traits: ["رشدپذیر", "آگاه", "پویا", "تکامل‌یافته"] }
+    ]
+  },
+  {
+    id: 3,
+    icon: "💼",
+    category: "کار و حرفه",
+    title: "هوش هیجانی در محیط کار",
+    desc: "چقدر می‌توانید احساسات خود و دیگران را در محیط کار مدیریت کنید؟",
+    questions: 7,
+    time: "۵ دقیقه",
+    qs: [
+      "وقتی همکاری انتقاد می‌کند، می‌توانم بدون واکنش احساسی به آن گوش بدهم.",
+      "احساسات دیگران را به‌سرعت درک می‌کنم.",
+      "در شرایط استرس‌زای کاری، آرامش خود را حفظ می‌کنم.",
+      "قبل از تصمیم‌گیری مهم، احساساتم را مدیریت می‌کنم.",
+      "می‌توانم تعارض‌های تیمی را با حفظ رابطه حل کنم.",
+      "خودآگاهی نسبت به نقاط ضعفم در کار دارم.",
+      "انگیزه‌ی خودم را در شرایط سخت حفظ می‌کنم."
+    ],
+    scale: ["اصلاً", "خیلی کم", "کم", "متوسط", "زیاد", "خیلی زیاد", "کاملاً"],
+    results: [
+      { range: [7, 22], emoji: "🌱", type: "هوش هیجانی پایه", title: "در حال رشد", desc: "هوش هیجانی شما در مراحل ابتدایی است. با تمرین خودآگاهی، تنظیم احساسات و همدلی می‌توانید به سرعت پیشرفت کنید. این مهارتی است که یاد گرفته می‌شود.", traits: ["رشدپذیر", "آموزش‌پذیر", "صادق", "اولیه"] },
+      { range: [23, 31], emoji: "⚙️", type: "هوش هیجانی متوسط", title: "در حال توسعه", desc: "شما در برخی جنبه‌های هوش هیجانی قوی هستید اما فضا برای رشد وجود دارد. تمرکز بر مدیریت لحظه‌های چالش‌برانگیز می‌تواند تفاوت بزرگی ایجاد کند.", traits: ["پیشرفت‌گرا", "آگاه", "متعادل", "کاربردی"] },
+      { range: [32, 39], emoji: "🎯", type: "هوش هیجانی بالا", title: "رهبر احساسی", desc: "شما هوش هیجانی قابل توجهی دارید. توانایی مدیریت احساسات خود و درک دیگران یکی از مزیت‌های رقابتی شما در محیط کار است.", traits: ["همدل", "رهبر", "آرام", "مؤثر"] },
+      { range: [40, 45], emoji: "🌟", type: "هوش هیجانی بسیار بالا", title: "استاد احساسات", desc: "شما در کنترل احساسات و درک دیگران در سطح بالایی هستید. این توانایی ارزشمند شما را به عنوان یک همکار، رهبر و مذاکره‌کننده استثنایی می‌سازد.", traits: ["استثنایی", "الهام‌بخش", "خردمند", "توانمند"] },
+      { range: [46, 49], emoji: "💫", type: "هوش هیجانی فوق‌العاده", title: "هوش احساسی نادر", desc: "هوش هیجانی شما در سطح نادری قرار دارد. درک عمیق از احساسات خود و دیگران، همراه با توانایی مدیریت پیچیده‌ترین موقعیت‌های انسانی، شما را کاملاً متمایز می‌کند.", traits: ["استاد", "منحصربه‌فرد", "عمیق", "الهام‌بخش"] }
+    ]
+  },
+  {
+    id: 4,
+    icon: "😰",
+    category: "سلامت روان",
+    title: "سطح اضطراب روزانه",
+    desc: "این تست به شما کمک می‌کند تا سطح اضطراب روزمره‌ی خود را بسنجید.",
+    questions: 7,
+    time: "۴ دقیقه",
+    qs: [
+      "در طول روز احساس نگرانی و دلشوره دارم.",
+      "جسمم در مواجهه با موقعیت‌های استرس‌زا واکنش‌هایی مثل تعریق یا تپش قلب نشان می‌دهد.",
+      "نمی‌توانم ذهنم را از افکار نگران‌کننده خاموش کنم.",
+      "از موقعیت‌هایی که ممکن است دچار خجالت شوم، اجتناب می‌کنم.",
+      "خوابم تحت تأثیر نگرانی‌هایم است.",
+      "نسبت به اتفاقاتی که هنوز نیفتاده نگرانی دارم.",
+      "تمرکز کردن برایم سخت است چون ذهنم مدام مشغول است."
+    ],
+    scale: ["اصلاً", "خیلی کم", "کم", "متوسط", "زیاد", "خیلی زیاد", "کاملاً"],
+    results: [
+      { range: [7, 18], emoji: "☀️", type: "اضطراب حداقلی", title: "آرامش درون", desc: "سطح اضطراب شما بسیار پایین است. در برابر استرس‌های روزمره مقاومت خوبی دارید و معمولاً آرامش خود را حفظ می‌کنید. این نشانه‌ی سلامت روانی خوب است.", traits: ["آرام", "مقاوم", "ثابت", "متعادل"] },
+      { range: [19, 27], emoji: "🌤", type: "اضطراب خفیف", title: "نگرانی طبیعی", desc: "شما گاهی دلواپس می‌شوید اما این سطح از اضطراب طبیعی است. تکنیک‌های آرام‌سازی مثل تنفس عمیق یا مدیتیشن می‌توانند کمک‌کننده باشند.", traits: ["عادی", "مدیریت‌پذیر", "قابل‌بهبود", "آگاه"] },
+      { range: [28, 35], emoji: "⛅", type: "اضطراب متوسط", title: "نیاز به توجه", desc: "سطح اضطراب شما متوسط است و توجه بیشتری می‌طلبد. تمرین ذهن‌آگاهی، ورزش منظم و در صورت نیاز مشاوره می‌تواند به شما کمک کند.", traits: ["هوشیار", "نیازمند مراقبت", "پاسخ‌گو", "تلاشگر"] },
+      { range: [36, 43], emoji: "🌧", type: "اضطراب بالا", title: "نیاز به مراقبت", desc: "اضطراب شما در سطح بالایی است. این می‌تواند روی زندگی روزمره‌تان تأثیر بگذارد. توصیه می‌شود با یک متخصص روانشناسی مشاوره کنید.", traits: ["چالش‌دار", "نیازمند حمایت", "شجاع", "قابل‌درمان"] },
+      { range: [44, 49], emoji: "🌩", type: "اضطراب شدید", title: "مراقبت ضروری", desc: "نتایج نشان‌دهنده‌ی سطح بالایی از اضطراب است. این تست جایگزین تشخیص پزشکی نیست، اما توصیه اکید داریم با یک روانشناس یا روانپزشک مشورت کنید.", traits: ["نیازمند کمک فوری", "شجاع", "ارزشمند", "قابل‌درمان"] }
+    ]
+  },
+  {
+    id: 5,
+    icon: "🪞",
+    category: "شخصیت",
+    title: "عزت‌نفس و خودباوری",
+    desc: "ببینید تصویری که از خودتان دارید چقدر با ارزش واقعی‌تان هم‌راستاست.",
+    questions: 7,
+    time: "۵ دقیقه",
+    qs: [
+      "به توانایی‌ها و ارزش خود ایمان دارم.",
+      "وقتی اشتباه می‌کنم، می‌توانم خودم را ببخشم.",
+      "نظر دیگران خیلی تعیین‌کننده‌ی ارزش من است.",
+      "می‌توانم برای خواسته‌هایم حد و مرز بگذارم.",
+      "از بودن با خودم لذت می‌برم.",
+      "در مقابل تحقیر یا توهین دیگران، خودم را دفاع می‌کنم.",
+      "احساس می‌کنم لیاقت عشق و موفقیت را دارم."
+    ],
+    scale: ["اصلاً", "خیلی کم", "کم", "متوسط", "زیاد", "خیلی زیاد", "کاملاً"],
+    results: [
+      { range: [7, 21], emoji: "🌱", type: "عزت‌نفس پایین", title: "زمان مراقبت از خود", desc: "عزت‌نفس پایین نشان می‌دهد که صدای انتقادگر درونی‌تان بلند است. این قابل تغییر است. شروع با مراقبت از خود، تعیین حدومرز و کار با متخصص می‌تواند تحولی عمیق ایجاد کند.", traits: ["رشدپذیر", "حساس", "عمیق", "درحال‌کشف"] },
+      { range: [22, 30], emoji: "🌿", type: "عزت‌نفس متوسط", title: "در مسیر رشد", desc: "عزت‌نفس شما در سطح متوسط است. گاهی به خود باور دارید و گاهی تردید می‌کنید. با تمرین مداوم خودآگاهی و خودمراقبتی می‌توانید این را تقویت کنید.", traits: ["رشدپذیر", "پیشرفت‌گرا", "آگاه", "تلاشگر"] },
+      { range: [31, 38], emoji: "🌲", type: "عزت‌نفس سالم", title: "پایه‌ی محکم", desc: "عزت‌نفس شما در سطح سالمی قرار دارد. به ارزش خود باور دارید، حدومرز می‌گذارید و خطاهایتان را می‌پذیرید بدون اینکه خود را نابود کنید.", traits: ["متعادل", "مطمئن", "خودآگاه", "قوی"] },
+      { range: [39, 45], emoji: "🦅", type: "عزت‌نفس بالا", title: "اعتماد به نفس قوی", desc: "شما عزت‌نفس بالایی دارید. به ارزش‌های خود ایمان دارید، از انتقاد سازنده استقبال می‌کنید و در چالش‌ها، قدرت خود را می‌بینید.", traits: ["قوی", "مستقل", "الهام‌بخش", "رهبر"] },
+      { range: [46, 49], emoji: "💎", type: "عزت‌نفس استثنایی", title: "اعتماد به نفس نادر", desc: "عزت‌نفس شما در سطح فوق‌العاده‌ای است. بدون نیاز به تأیید دیگران، به ارزش خود ایمان دارید و این نیرو به همه اطرافیانتان هم انتقال می‌یابد.", traits: ["استثنایی", "الهام‌بخش", "رها", "کامل"] }
+    ]
+  },
+  {
+    id: 6,
+    icon: "🤝",
+    category: "روابط اجتماعی",
+    title: "مهارت‌های ارتباطی",
+    desc: "چقدر در برقراری و حفظ روابط اجتماعی مهارت دارید؟",
+    questions: 7,
+    time: "۵ دقیقه",
+    qs: [
+      "می‌توانم به راحتی با افراد جدید آشنا شوم.",
+      "در گفتگوها، بیشتر گوش می‌دهم تا صحبت کنم.",
+      "وقتی کسی درد دلش را می‌گوید، احساس همدردی واقعی می‌کنم.",
+      "در بیان نظراتم، حتی وقتی با اکثریت مخالفم، راحت هستم.",
+      "می‌توانم تعارض را بدون خشونت کلامی حل کنم.",
+      "دوستی‌هایم را در طول زمان حفظ می‌کنم.",
+      "می‌توانم زبان بدن و احساسات پشت کلمات را بخوانم."
+    ],
+    scale: ["اصلاً", "خیلی کم", "کم", "متوسط", "زیاد", "خیلی زیاد", "کاملاً"],
+    results: [
+      { range: [7, 22], emoji: "🌱", type: "مهارت ابتدایی", title: "در حال یادگیری", desc: "مهارت‌های ارتباطی شما در مراحل اولیه است. با تمرین گوش دادن فعال، همدلی و بیان صادقانه می‌توانید به سرعت پیشرفت کنید.", traits: ["یادگیرنده", "صادق", "بالقوه", "رشدپذیر"] },
+      { range: [23, 31], emoji: "🌿", type: "مهارت متوسط", title: "ارتباط‌گر در حال رشد", desc: "شما در برخی جنبه‌های ارتباطی قوی هستید. با تمرکز بر گوش دادن عمیق‌تر و بیان صادقانه‌تر می‌توانید روابط عمیق‌تری بسازید.", traits: ["پیشرفت‌گرا", "قابل‌اعتماد", "مشتاق", "متعادل"] },
+      { range: [32, 39], emoji: "🌊", type: "مهارت خوب", title: "ارتباط‌گر مؤثر", desc: "شما مهارت‌های ارتباطی خوبی دارید. افراد در کنار شما احساس دیده شدن می‌کنند. روابطتان معمولاً عمیق و ماندگار است.", traits: ["همدل", "مؤثر", "مطمئن", "محبوب"] },
+      { range: [40, 45], emoji: "✨", type: "مهارت بالا", title: "ارتباط‌گر طبیعی", desc: "شما استعداد طبیعی در برقراری ارتباط دارید. توانایی شما در درک دیگران، بیان خود و مدیریت روابط، شما را یک همراه ارزشمند می‌سازد.", traits: ["طبیعی", "الهام‌بخش", "اثرگذار", "دوست‌داشتنی"] },
+      { range: [46, 49], emoji: "🌟", type: "مهارت استثنایی", title: "استاد ارتباط", desc: "مهارت‌های ارتباطی شما در سطح نادری است. توانایی خواندن افراد، ایجاد اعتماد سریع و مدیریت پیچیده‌ترین روابط انسانی، شما را کاملاً متمایز می‌کند.", traits: ["استاد", "نادر", "اثرگذار", "محبوب"] }
+    ]
+  },
+  {
+    id: 7,
+    icon: "🎯",
+    category: "کار و حرفه",
+    title: "سبک رهبری و مدیریت",
+    desc: "کشف کنید که چه سبک رهبری طبیعی دارید و در کجا بیشترین تأثیر را می‌گذارید.",
+    questions: 7,
+    time: "۵ دقیقه",
+    qs: [
+      "وقتی در یک تیم هستم، معمولاً پیشنهاد راه‌حل می‌دهم.",
+      "ترجیح می‌دهم وظایف را تفویض کنم تا همه چیز را خودم انجام دهم.",
+      "برایم مهم است که همه‌ی اعضای تیم صدایشان شنیده شود.",
+      "در شرایط بحرانی، آرام می‌مانم و تصمیم سریع می‌گیرم.",
+      "الهام دادن به دیگران برایم مهم‌تر از کنترل آن‌هاست.",
+      "از شکست‌ها درس می‌گیرم و آن را با تیم به اشتراک می‌گذارم.",
+      "به رشد و پیشرفت اعضای تیم به اندازه‌ی نتیجه اهمیت می‌دهم."
+    ],
+    scale: ["اصلاً", "خیلی کم", "کم", "متوسط", "زیاد", "خیلی زیاد", "کاملاً"],
+    results: [
+      { range: [7, 22], emoji: "🌱", type: "رهبر نوپا", title: "استعداد در حال شکوفایی", desc: "شما هنوز در مراحل اولیه کشف سبک رهبری خود هستید. این کاملاً طبیعی است. با کسب تجربه و یادگیری، رهبر قوی‌تری خواهید شد.", traits: ["رشدپذیر", "کنجکاو", "آموزش‌پذیر", "بالقوه"] },
+      { range: [23, 31], emoji: "⚙️", type: "رهبر وظیفه‌محور", title: "مدیر عملگرا", desc: "شما بیشتر روی نتایج و وظایف تمرکز دارید. قوی در اجرا هستید. با یادگیری بیشتر درباره‌ی انگیزش انسانی می‌توانید تیم‌های قوی‌تری بسازید.", traits: ["عملگرا", "نتیجه‌محور", "منظم", "قابل‌اعتماد"] },
+      { range: [32, 39], emoji: "🌊", type: "رهبر مشارکتی", title: "رهبر تیم‌ساز", desc: "شما یک رهبر مشارکتی هستید که به صدای همه اهمیت می‌دهد. توانایی ایجاد فضای امن برای ایده‌های نو یکی از قدرت‌های اصلی شماست.", traits: ["همدل", "مشارکتی", "الهام‌بخش", "تیم‌ساز"] },
+      { range: [40, 45], emoji: "🔥", type: "رهبر تحول‌گرا", title: "کاتالیزور تغییر", desc: "شما رهبری هستید که تحول ایجاد می‌کند. توانایی الهام دادن به دیگران، تفویض هوشمندانه و تعادل بین نتیجه و انسان شما را استثنایی می‌سازد.", traits: ["تحول‌گرا", "الهام‌بخش", "استراتژیک", "قوی"] },
+      { range: [46, 49], emoji: "🌟", type: "رهبر استثنایی", title: "رهبر ذاتی", desc: "رهبری برای شما یک هدیه‌ی ذاتی است. ترکیب خودآگاهی، همدلی، چشم‌انداز و توانایی ایجاد تغییر واقعی شما را در رده‌ی رهبران تأثیرگذار قرار می‌دهد.", traits: ["ذاتی", "تأثیرگذار", "نادر", "الهام‌بخش"] }
+    ]
+  },
+  {
+    id: 8,
+    icon: "💪",
+    category: "سلامت روان",
+    title: "سطح خودشناسی",
+    desc: "چقدر خودتان را می‌شناسید؟ این تست عمق خودآگاهی شما را می‌سنجد.",
+    questions: 7,
+    time: "۵ دقیقه",
+    qs: [
+      "می‌توانم دقیقاً توضیح دهم که در یک لحظه چه احساسی دارم.",
+      "الگوهای رفتاری خود را می‌شناسم.",
+      "می‌دانم چه چیزی عمیقاً برایم ارزش دارد.",
+      "رفتارهایم را با ارزش‌هایم هماهنگ می‌کنم.",
+      "نقاط کوری احتمالی خودم را می‌شناسم.",
+      "می‌توانم تفاوت بین احساس و واقعیت را تشخیص دهم.",
+      "درک می‌کنم که چه چیزی واکنش‌های احساسی قوی در من ایجاد می‌کند."
+    ],
+    scale: ["اصلاً", "خیلی کم", "کم", "متوسط", "زیاد", "خیلی زیاد", "کاملاً"],
+    results: [
+      { range: [7, 22], emoji: "🌫", type: "خودشناسی اولیه", title: "آغاز سفر درون", desc: "سفر خودشناسی شما تازه شروع شده. این ارزشمندترین سفری است که می‌توانید انجام دهید. با مدیتیشن، نوشتن روزانه و صحبت با متخصص می‌توانید عمیق‌تر بروید.", traits: ["در‌آغاز", "رشدپذیر", "کنجکاو", "باانگیزه"] },
+      { range: [23, 31], emoji: "🌤", type: "خودشناسی متوسط", title: "در حال کشف", desc: "شما خودتان را تا حدی می‌شناسید اما لایه‌های عمیق‌تری هنوز منتظر کشف هستند. تأمل منظم و چالش کردن باورهای خود می‌تواند بسیار مفید باشد.", traits: ["کاشف", "باهوش", "رشدپذیر", "آگاه"] },
+      { range: [32, 39], emoji: "🔍", type: "خودشناسی خوب", title: "ناظر درونی", desc: "سطح خودشناسی شما قابل توجه است. توانایی مشاهده‌ی خود بدون قضاوت شدید، یکی از ارزشمندترین مهارت‌های انسانی است که شما آن را دارید.", traits: ["خودآگاه", "ناظر", "صادق", "پختده"] },
+      { range: [40, 45], emoji: "🌟", type: "خودشناسی بالا", title: "شاهد بی‌طرف", desc: "خودشناسی شما در سطح بالایی است. می‌توانید افکار، احساسات و رفتارهایتان را با دقت ببینید و این آگاهی در تصمیم‌گیری‌هایتان نقش مثبت ایفا می‌کند.", traits: ["عمیق", "بی‌طرف", "خردمند", "رها"] },
+      { range: [46, 49], emoji: "💫", type: "خودشناسی عمیق", title: "روح آگاه", desc: "شما در عمق ندرتی از خودشناسی قرار دارید. درک شما از طبیعت خودتان، انگیزه‌ها، ترس‌ها و ارزش‌هایتان به ندرت یافت می‌شود و این پایه‌ای برای زندگی اصیل است.", traits: ["نادر", "اصیل", "عمیق", "روشن‌بین"] }
+    ]
+  },
+  {
+    id: 9,
+    icon: "🌀",
+    category: "روابط عاشقانه",
+    title: "زبان عشق شما",
+    desc: "چگونه عشق دریافت می‌کنید و ابراز می‌کنید؟ کلمات، لمس، هدیه، وقت یا خدمت؟",
+    questions: 7,
+    time: "۵ دقیقه",
+    qs: [
+      "وقتی شریکم کارهای عملی برایم انجام می‌دهد، بیشتر از تعریف کلامی حس ارزشمندی می‌کنم.",
+      "تماس فیزیکی مثل در آغوش گرفتن، برایم مهم‌ترین نشانه‌ی عشق است.",
+      "وقتی کسی وقت باکیفیت برایم می‌گذارد، بیشتر از هر هدیه‌ای احساس محبت می‌کنم.",
+      "دریافت هدیه، حتی کوچک، برایم نشانه‌ی قوی توجه و محبت است.",
+      "تعریف‌ها و کلمات محبت‌آمیز برایم معنای عمیقی دارند.",
+      "دوست دارم شریکم بدون خواستن، نیازهایم را بفهمد و برطرف کند.",
+      "نزدیکی جسمانی در روابطم بیشتر از حرف زدن معنا دارد."
+    ],
+    scale: ["اصلاً", "خیلی کم", "کم", "متوسط", "زیاد", "خیلی زیاد", "کاملاً"],
+    results: [
+      { range: [7, 20], emoji: "🗣", type: "کلمات تأیید", title: "عشق با کلمات", desc: "زبان عشق اصلی شما 'کلمات تأیید' است. تعریف، قدردانی کلامی و ابراز محبت با جملات، برایتان قوی‌ترین پیام عشق را می‌فرستد.", traits: ["کلامی", "احساسی", "تأیید‌طلب", "بیانگر"] },
+      { range: [21, 28], emoji: "🤝", type: "اعمال خدمتگزارانه", title: "عشق در عمل", desc: "زبان عشق شما 'اعمال خدمتگزارانه' است. وقتی کسی برایتان کارهای عملی انجام می‌دهد، بیشتر از هر حرفی احساس محبت می‌کنید.", traits: ["عملگرا", "مراقب", "متوجه", "خدمتگر"] },
+      { range: [29, 35], emoji: "⏰", type: "وقت باکیفیت", title: "عشق در حضور", desc: "زبان عشق شما 'وقت باکیفیت' است. حضور کامل و توجه تمام‌وکمال شریک در کنارتان، برایتان گران‌بهاترین هدیه است.", traits: ["حضور", "توجه", "ارتباط", "عمق"] },
+      { range: [36, 42], emoji: "🎁", type: "دریافت هدیه", title: "عشق ملموس", desc: "زبان عشق شما 'دریافت هدیه' است. نه به خاطر مادیات، بلکه چون هدیه نشانه‌ی توجه و تفکر درباره‌ی شما است. حتی کوچک‌ترین هدیه پیام عمیقی می‌فرستد.", traits: ["توجه‌طلب", "احساسی", "قدرشناس", "ظریف"] },
+      { range: [43, 49], emoji: "🤗", type: "لمس فیزیکی", title: "عشق در تماس", desc: "زبان عشق شما 'لمس فیزیکی' است. در آغوش گرفتن، دست دادن و نزدیکی جسمانی، قوی‌ترین احساس محبت را در شما ایجاد می‌کند.", traits: ["لمسی", "حسی", "گرم", "نزدیک"] }
+    ]
+  },
+  {
+    id: 10,
+    icon: "🧠",
+    category: "کار و حرفه",
+    title: "سبک یادگیری و تفکر",
+    desc: "مغز شما چگونه اطلاعات را پردازش می‌کند؟ خلاق، منطقی، کل‌نگر یا جزئی‌نگر؟",
+    questions: 7,
+    time: "۵ دقیقه",
+    qs: [
+      "ترجیح می‌دهم ابتدا تصویر کلی را ببینم، سپس به جزئیات بپردازم.",
+      "با تصویرسازی ذهنی بهتر از مطالعه‌ی متن یاد می‌گیرم.",
+      "در حل مسائل، بیشتر از شهود استفاده می‌کنم تا تحلیل منطقی.",
+      "لیست و ساختار منظم برایم ضروری است.",
+      "ایده‌های نو و خلاقانه بیشتر از روش‌های ثابت جذبم می‌کند.",
+      "هنگام یادگیری، باید با موضوع تجربه‌ی عملی داشته باشم.",
+      "وقتی می‌توانم چیزی را توضیح دهم، احساس می‌کنم واقعاً یاد گرفتم."
+    ],
+    scale: ["اصلاً", "خیلی کم", "کم", "متوسط", "زیاد", "خیلی زیاد", "کاملاً"],
+    results: [
+      { range: [7, 21], emoji: "📐", type: "تفکر تحلیلی", title: "ذهن منطقی", desc: "شما با تفکر تحلیلی و منطقی پیش می‌روید. ساختار، داده‌ها و برهان‌های دقیق برایتان مهم است. در حل مسائل پیچیده و ریاضی‌وار می‌درخشید.", traits: ["منطقی", "دقیق", "ساختارمند", "تحلیلگر"] },
+      { range: [22, 30], emoji: "📋", type: "تفکر سیستماتیک", title: "ذهن سیستم‌ساز", desc: "شما به صورت سیستماتیک فکر می‌کنید. ترکیب ساختار و کارایی، شما را در سازماندهی پیچیده‌ترین پروژه‌ها توانمند می‌سازد.", traits: ["سیستماتیک", "کارآمد", "منظم", "برنامه‌ریز"] },
+      { range: [31, 38], emoji: "🌀", type: "تفکر ترکیبی", title: "ذهن همه‌جانبه", desc: "شما هم از منطق هم از شهود استفاده می‌کنید. این توانایی ترکیب تفکر چپ و راست مغز، شما را در موقعیت‌های متنوع انعطاف‌پذیر می‌سازد.", traits: ["انعطاف‌پذیر", "متنوع", "خلاق", "منطقی"] },
+      { range: [39, 45], emoji: "🎨", type: "تفکر خلاق", title: "ذهن خلاق", desc: "شما با شهور، تصویرسازی و اتصال ایده‌ها پیش می‌روید. ذهن خلاق شما راه‌حل‌های نوآورانه‌ای می‌یابد که دیگران نمی‌بینند.", traits: ["خلاق", "شهودی", "نوآور", "تصویری"] },
+      { range: [46, 49], emoji: "🌌", type: "تفکر کل‌نگر", title: "ذهن بزرگ‌بین", desc: "شما با تصویر کلی فکر می‌کنید. توانایی دیدن الگوها، ارتباط‌ها و چشم‌اندازهای بزرگ، شما را در استراتژی و خلق ایده‌های تحول‌آفرین استثنایی می‌کند.", traits: ["کل‌نگر", "استراتژیک", "الهام‌یافته", "رویابین"] }
+    ]
+  }
+];
+
+let currentTest = null;
+let currentQ = 0;
+let answers = [];
+
+let activeCardIdx = 0;
+
+function renderCards() {
+  const track = document.getElementById('railTrack');
+  const dotsEl = document.getElementById('railDots');
+  if (!track) return;
+
+  TESTS.forEach((test, idx) => {
+    const card = document.createElement('div');
+    card.className = 'test-card';
+    card.dataset.idx = idx;
+    card.innerHTML = `
+      <div class="card-icon">${test.icon}</div>
+      <div class="card-category">${test.category}</div>
+      <div class="card-title">${test.title}</div>
+      <div class="card-desc">${test.desc}</div>
+      <div class="card-meta">
+        <span>📝 ${test.questions}</span>
+        <span>⏱ ${test.time}</span>
+      </div>
+      <button class="card-start-btn">شروع تست ←</button>
+    `;
+    card.onclick = (e) => {
+      // If not active, just scroll to it; if already active, open test
+      if (idx !== activeCardIdx) {
+        scrollToCard(idx);
+      } else {
+        openTest(test);
+      }
+    };
+    track.appendChild(card);
+
+    // dot
+    const dot = document.createElement('button');
+    dot.className = 'rail-dot' + (idx === 0 ? ' active' : '');
+    dot.setAttribute('aria-label', `تست ${idx + 1}`);
+    dot.onclick = () => scrollToCard(idx);
+    dotsEl.appendChild(dot);
+  });
+
+  // Initial center on first card after layout
+  requestAnimationFrame(() => {
+    scrollToCard(0, false);
+    updateCardScales();
+  });
+
+  // Drag to scroll
+  let isDown = false, startX, scrollLeft, hasDragged = false;
+  track.addEventListener('mousedown', e => {
+    isDown = true; hasDragged = false;
+    track.classList.add('grabbing');
+    startX = e.pageX - track.offsetLeft;
+    scrollLeft = track.scrollLeft;
+  });
+  track.addEventListener('mouseleave', () => { isDown = false; track.classList.remove('grabbing'); });
+  track.addEventListener('mouseup', () => { isDown = false; track.classList.remove('grabbing'); });
+  track.addEventListener('mousemove', e => {
+    if (!isDown) return;
+    e.preventDefault();
+    hasDragged = true;
+    const x = e.pageX - track.offsetLeft;
+    track.scrollLeft = scrollLeft - (x - startX) * 1.1;
+  });
+
+  // Scroll → update scales + snap to nearest
+  let scrollTimer;
+  track.addEventListener('scroll', () => {
+    updateCardScales();
+    clearTimeout(scrollTimer);
+    scrollTimer = setTimeout(() => {
+      snapToNearestCard();
+    }, 80);
+  });
+}
+
+function getCardWidth() {
+  const card = document.querySelector('.test-card');
+  if (!card) return 256;
+  return card.getBoundingClientRect().width + 16;
+}
+
+function scrollToCard(idx, animate = true) {
+  const track = document.getElementById('railTrack');
+  const cards = track.querySelectorAll('.test-card');
+  if (!cards[idx]) return;
+  const card = cards[idx];
+  const trackRect = track.getBoundingClientRect();
+  const cardRect = card.getBoundingClientRect();
+  const offset = card.offsetLeft - track.offsetWidth / 2 + card.offsetWidth / 2;
+  track.scrollTo({ left: offset, behavior: animate ? 'smooth' : 'instant' });
+}
+
+function scrollRail(dir) {
+  if (dir === -1 && activeCardIdx < TESTS.length - 1) scrollToCard(activeCardIdx + 1);
+  if (dir === 1 && activeCardIdx > 0) scrollToCard(activeCardIdx - 1);
+}
+
+function snapToNearestCard() {
+  const track = document.getElementById('railTrack');
+  const cards = track.querySelectorAll('.test-card');
+  const trackCenter = track.scrollLeft + track.offsetWidth / 2;
+  let closest = 0, minDist = Infinity;
+  cards.forEach((c, i) => {
+    const cardCenter = c.offsetLeft + c.offsetWidth / 2;
+    const dist = Math.abs(cardCenter - trackCenter);
+    if (dist < minDist) { minDist = dist; closest = i; }
+  });
+  if (closest !== activeCardIdx) {
+    scrollToCard(closest);
+  }
+}
+
+function updateCardScales() {
+  const track = document.getElementById('railTrack');
+  const cards = track.querySelectorAll('.test-card');
+  const dots = document.querySelectorAll('.rail-dot');
+  const trackCenter = track.scrollLeft + track.offsetWidth / 2;
+
+  let closest = 0, minDist = Infinity;
+  cards.forEach((c, i) => {
+    const cardCenter = c.offsetLeft + c.offsetWidth / 2;
+    const dist = Math.abs(cardCenter - trackCenter);
+    if (dist < minDist) { minDist = dist; closest = i; }
+    c.classList.remove('rail-active', 'rail-near');
+    if (dist < 20) c.classList.add('rail-active');
+    else if (dist < getCardWidth() * 1.2) c.classList.add('rail-near');
+  });
+
+  activeCardIdx = closest;
+  dots.forEach((d, i) => d.classList.toggle('active', i === closest));
+}
+
+function openTest(test) {
+  currentTest = test;
+  currentQ = 0;
+  answers = new Array(test.qs.length).fill(null);
+
+  document.getElementById('modalCategory').textContent = test.category;
+  document.getElementById('modalTitle').textContent = test.title;
+  document.getElementById('resultBlock').classList.remove('active');
+  document.getElementById('qNav').style.display = 'flex';
+  document.getElementById('resultActions').style.display = 'none';
+  document.getElementById('warnMsg').classList.remove('show');
+
+  renderQuestions();
+  updateProgress();
+  showQ(0);
+
+  const overlay = document.getElementById('modalOverlay');
+  overlay.classList.add('open');
+  requestAnimationFrame(() => overlay.classList.add('visible'));
+  document.body.style.overflow = 'hidden';
+}
+
+function renderQuestions() {
+  const container = document.getElementById('questionsContainer');
+  container.innerHTML = '';
+  currentTest.qs.forEach((q, i) => {
+    const div = document.createElement('div');
+    div.className = 'question-block';
+    div.id = `q_${i}`;
+
+    const labels = currentTest.scale;
+    let btns = '';
+    labels.forEach((lbl, v) => {
+      btns += `<button class="scale-btn" id="btn_${i}_${v}" onclick="selectAnswer(${i}, ${v+1})">${v+1}</button>`;
+    });
+
+    div.innerHTML = `
+      <div class="q-number">سؤال ${i+1} از ${currentTest.qs.length}</div>
+      <div class="q-text">${q}</div>
+      <div class="scale-wrap">
+        <div class="scale-labels">
+          <span>${labels[0]}</span>
+          <span>${labels[labels.length-1]}</span>
+        </div>
+        <div class="scale-options">${btns}</div>
+      </div>
+    `;
+    container.appendChild(div);
+  });
+}
+
+function selectAnswer(qIdx, val) {
+  answers[qIdx] = val;
+  // Update buttons
+  for (let v = 1; v <= 7; v++) {
+    const btn = document.getElementById(`btn_${qIdx}_${v-1}`);
+    if (btn) btn.classList.toggle('selected', v === val);
+  }
+  document.getElementById('warnMsg').classList.remove('show');
+}
+
+function showQ(idx) {
+  document.querySelectorAll('.question-block').forEach(b => b.classList.remove('active'));
+  const qEl = document.getElementById(`q_${idx}`);
+  if (qEl) qEl.classList.add('active');
+
+  document.getElementById('btnPrev').disabled = idx === 0;
+  const isLast = idx === currentTest.qs.length - 1;
+  const btnNext = document.getElementById('btnNext');
+  btnNext.textContent = isLast ? 'مشاهده نتیجه ✦' : 'بعدی ←';
+
+  document.getElementById('modalQCounter').textContent = `${idx + 1} / ${currentTest.qs.length}`;
+}
+
+function updateProgress() {
+  const answered = answers.filter(a => a !== null).length;
+  const pct = (answered / currentTest.qs.length) * 100;
+  document.getElementById('progressFill').style.width = pct + '%';
+}
+
+function nextQ() {
+  if (answers[currentQ] === null) {
+    document.getElementById('warnMsg').classList.add('show');
+    return;
+  }
+  document.getElementById('warnMsg').classList.remove('show');
+
+  if (currentQ < currentTest.qs.length - 1) {
+    currentQ++;
+    showQ(currentQ);
+    updateProgress();
+  } else {
+    showResult();
+  }
+}
+
+function prevQ() {
+  if (currentQ > 0) {
+    currentQ--;
+    showQ(currentQ);
+    updateProgress();
+  }
+}
+
+function showResult() {
+  const total = answers.reduce((a, b) => a + (b || 0), 0);
+  const result = currentTest.results.find(r => total >= r.range[0] && total <= r.range[1])
+    || currentTest.results[currentTest.results.length - 1];
+
+  document.getElementById('resultEmoji').textContent = result.emoji;
+  document.getElementById('resultType').textContent = result.type;
+  document.getElementById('resultTitle').textContent = result.title;
+  document.getElementById('resultScore').textContent = `امتیاز: ${total} از ${currentTest.qs.length * 7}`;
+  document.getElementById('resultDesc').textContent = result.desc;
+
+  const traitsEl = document.getElementById('resultTraits');
+  traitsEl.innerHTML = result.traits.map(t => `<span class="trait-tag">${t}</span>`).join('');
+
+  document.querySelectorAll('.question-block').forEach(b => b.classList.remove('active'));
+  document.getElementById('resultBlock').classList.add('active');
+  document.getElementById('qNav').style.display = 'none';
+  document.getElementById('resultActions').style.display = 'flex';
+  document.getElementById('progressFill').style.width = '100%';
+  document.getElementById('modalQCounter').textContent = 'نتیجه';
+  trackTestDone();
+}
+
+function retakeTest() {
+  openTest(currentTest);
+}
+
+function closeModal() {
+  const overlay = document.getElementById('modalOverlay');
+  overlay.classList.remove('visible');
+  setTimeout(() => overlay.classList.remove('open'), 400);
+  document.body.style.overflow = '';
+}
+
+function handleOverlayClick(e) {
+  if (e.target === document.getElementById('modalOverlay')) closeModal();
+}
+
+// ── STORAGE HELPERS ──
+function safeGet(key) {
+  try { return JSON.parse(localStorage.getItem(key)); } catch { return null; }
+}
+function safeSet(key, val) {
+  try { localStorage.setItem(key, JSON.stringify(val)); } catch {}
+}
+
+// ── VISIT TRACKING ──
+function trackVisit() {
+  const today = new Date().toDateString();
+  const stats = safeGet('dg_stats') || { total: 0, todayDate: today, todayCount: 0, tests: 0 };
+  stats.total = (stats.total || 0) + 1;
+  if (stats.todayDate !== today) { stats.todayDate = today; stats.todayCount = 0; }
+  stats.todayCount = (stats.todayCount || 0) + 1;
+  safeSet('dg_stats', stats);
+  renderStats();
+}
+
+function trackTestDone() {
+  const stats = safeGet('dg_stats') || { total: 0, tests: 0 };
+  stats.tests = (stats.tests || 0) + 1;
+  safeSet('dg_stats', stats);
+  renderStats();
+}
+
+function renderStats() {
+  const stats = safeGet('dg_stats') || {};
+  const fbs = safeGet('dg_feedbacks') || [];
+  const fmt = n => (n != null) ? n.toLocaleString('fa-IR') : '۰';
+  const el = id => document.getElementById(id);
+  if (el('statVisits'))    el('statVisits').textContent    = fmt(stats.total);
+  if (el('statToday'))     el('statToday').textContent     = fmt(stats.todayCount);
+  if (el('statTests'))     el('statTests').textContent     = fmt(stats.tests);
+  const approved = fbs.filter(f => f.status === 'approved').length;
+  if (el('statFeedbacks')) el('statFeedbacks').textContent = fmt(approved);
+}
+
+// ── FEEDBACK SUBMIT ──
+let selectedStars = 0;
+
+document.addEventListener('DOMContentLoaded', () => {
+  document.querySelectorAll('.star-btn').forEach(btn => {
+    btn.addEventListener('mouseenter', () => {
+      const v = +btn.dataset.v;
+      document.querySelectorAll('.star-btn').forEach(b => b.classList.toggle('lit', +b.dataset.v <= v));
+    });
+    btn.addEventListener('mouseleave', () => {
+      document.querySelectorAll('.star-btn').forEach(b => b.classList.toggle('lit', +b.dataset.v <= selectedStars));
+    });
+    btn.addEventListener('click', () => {
+      selectedStars = +btn.dataset.v;
+      document.querySelectorAll('.star-btn').forEach(b => b.classList.toggle('lit', +b.dataset.v <= selectedStars));
+    });
+  });
+  renderApprovedList();
+  renderStats();
+  trackVisit();
+});
+
+function submitFeedback() {
+  const name = (document.getElementById('feedbackName').value || '').trim();
+  const text = (document.getElementById('feedbackText').value || '').trim();
+  if (!name && !text && !selectedStars) return;
+  const fbs = safeGet('dg_feedbacks') || [];
+  fbs.unshift({
+    id: Date.now(),
+    name: name || 'ناشناس',
+    stars: selectedStars,
+    text,
+    date: new Date().toLocaleDateString('fa-IR'),
+    status: 'pending'   // pending | approved | rejected
+  });
+  if (fbs.length > 200) fbs.length = 200;
+  safeSet('dg_feedbacks', fbs);
+  document.getElementById('feedbackForm').style.display = 'none';
+  document.getElementById('feedbackSuccess').style.display = 'flex';
+  renderStats();
+  setTimeout(() => {
+    document.getElementById('feedbackSuccess').style.display = 'none';
+    document.getElementById('feedbackForm').style.display = 'flex';
+    document.getElementById('feedbackName').value = '';
+    document.getElementById('feedbackText').value = '';
+    selectedStars = 0;
+    document.querySelectorAll('.star-btn').forEach(b => b.classList.remove('lit'));
+  }, 2800);
+}
+
+function renderApprovedList() {
+  const fbs = (safeGet('dg_feedbacks') || []).filter(f => f.status === 'approved');
+  const container = document.getElementById('approvedList');
+  if (!container) return;
+  if (!fbs.length) { container.innerHTML = ''; return; }
+  const starStr = n => '★'.repeat(Math.max(0,n)) + '☆'.repeat(Math.max(0, 5-n));
+  container.innerHTML = `<div class="approved-list-title">نظرات تأیید شده (${fbs.length})</div>` +
+    fbs.map(f => `<div class="ap-item">
+      <div class="ap-header">
+        <span class="ap-name">${f.name}</span>
+        <div class="ap-right">
+          <span class="ap-stars">${starStr(f.stars)}</span>
+          <span class="ap-date">${f.date}</span>
+        </div>
+      </div>
+      ${f.text ? `<div class="ap-text">${f.text}</div>` : ''}
+    </div>`).join('');
+}
+
+// ── ADMIN PANEL ──
+let currentTab = 'pending';
+const ADMIN_PASS_HASH = 'darongah2024admin'; // Change this to your password
+
+function openAdminPanel() {
+  // Check if already authenticated this session
+  if (sessionStorage.getItem('dg_admin_auth') === '1') {
+    _showAdminPanel();
+    return;
+  }
+  // Show password modal
+  showAdminLogin();
+}
+
+function showAdminLogin() {
+  const existing = document.getElementById('adminLoginOverlay');
+  if (existing) existing.remove();
+
+  const overlay = document.createElement('div');
+  overlay.id = 'adminLoginOverlay';
+  overlay.style.cssText = `position:fixed;inset:0;background:rgba(0,0,0,0.92);z-index:3000;display:flex;align-items:center;justify-content:center;backdrop-filter:blur(12px);`;
+  overlay.innerHTML = `
+    <div style="background:var(--deep);border:1px solid var(--border);border-radius:20px;padding:40px 36px;width:100%;max-width:360px;text-align:center;animation:modalIn 0.3s ease">
+      <div style="width:52px;height:52px;border-radius:50%;background:var(--cream-faint);border:1px solid var(--gold-dim);display:flex;align-items:center;justify-content:center;margin:0 auto 20px;font-size:22px">🔐</div>
+      <div style="font-size:11px;letter-spacing:5px;color:var(--gold);text-transform:uppercase;margin-bottom:10px">پنل مدیریت</div>
+      <div style="font-size:20px;font-weight:800;color:var(--cream);margin-bottom:8px">درونگاه</div>
+      <div style="font-size:13px;color:var(--text-dim);margin-bottom:28px">رمز عبور را وارد کنید</div>
+      <input id="adminPassInput" type="password" placeholder="رمز عبور..."
+        style="width:100%;background:var(--surface);border:1px solid var(--border);border-radius:12px;padding:13px 18px;color:var(--cream);font-family:Vazirmatn,sans-serif;font-size:15px;text-align:center;letter-spacing:4px;margin-bottom:12px;outline:none;transition:border-color 0.2s"
+        onkeydown="if(event.key==='Enter')checkAdminPass()"
+        oninput="this.style.borderColor='var(--border)'">
+      <div id="adminPassErr" style="font-size:12px;color:#e87c6e;min-height:18px;margin-bottom:10px"></div>
+      <button onclick="checkAdminPass()" style="width:100%;padding:14px;background:var(--gold);color:var(--black);border:none;border-radius:12px;font-family:Vazirmatn,sans-serif;font-size:15px;font-weight:700;cursor:pointer;transition:all 0.2s;margin-bottom:10px">ورود</button>
+      <button onclick="document.getElementById('adminLoginOverlay').remove()" style="width:100%;padding:10px;background:transparent;color:var(--text-faint);border:1px solid var(--border);border-radius:12px;font-family:Vazirmatn,sans-serif;font-size:13px;cursor:pointer">انصراف</button>
+    </div>`;
+  document.body.appendChild(overlay);
+  setTimeout(() => document.getElementById('adminPassInput')?.focus(), 100);
+}
+
+function checkAdminPass() {
+  const input = document.getElementById('adminPassInput');
+  const err = document.getElementById('adminPassErr');
+  if (!input) return;
+  if (input.value === ADMIN_PASS_HASH) {
+    sessionStorage.setItem('dg_admin_auth', '1');
+    document.getElementById('adminLoginOverlay')?.remove();
+    _showAdminPanel();
+  } else {
+    err.textContent = 'رمز عبور اشتباه است';
+    input.style.borderColor = '#e87c6e';
+    input.value = '';
+    input.focus();
+  }
+}
+
+function _showAdminPanel() {
+  const overlay = document.getElementById('adminOverlay');
+  overlay.classList.add('open');
+  requestAnimationFrame(() => overlay.classList.add('visible'));
+  document.body.style.overflow = 'hidden';
+  switchTab('pending');
+}
+
+function closeAdminPanel() {
+  const overlay = document.getElementById('adminOverlay');
+  overlay.classList.remove('visible');
+  setTimeout(() => { overlay.classList.remove('open'); document.body.style.overflow = ''; }, 350);
+}
+
+function switchTab(tab) {
+  currentTab = tab;
+  document.querySelectorAll('.atab').forEach(t => t.classList.toggle('active', t.dataset.tab === tab));
+  renderAdminBody();
+}
+
+function renderAdminBody() {
+  const fbs = safeGet('dg_feedbacks') || [];
+  const body = document.getElementById('adminBody');
+  const pending  = fbs.filter(f => f.status === 'pending');
+  const approved = fbs.filter(f => f.status === 'approved');
+  const rejected = fbs.filter(f => f.status === 'rejected');
+  const sessions = safeGet('dg_convos') || {};
+
+  // Update badges
+  const setB = (id, n) => { const el = document.getElementById(id); if (el) el.textContent = n; };
+  setB('badgePending',  pending.length);
+  setB('badgeApproved', approved.length);
+  setB('badgeRejected', rejected.length);
+  setB('badgeConvos',   Object.keys(sessions).length);
+
+  if (currentTab === 'convos') { renderConvosTab(); return; }
+
+  if (currentTab === 'stats') {
+    const stats = safeGet('dg_stats') || {};
+    const fmt = n => (n != null) ? n.toLocaleString('fa-IR') : '۰';
+    body.innerHTML = `<div class="admin-stats-grid">
+      <div class="as-card"><div class="as-num">${fmt(stats.total)}</div><div class="as-label">بازدید کل</div></div>
+      <div class="as-card"><div class="as-num">${fmt(stats.todayCount)}</div><div class="as-label">امروز</div></div>
+      <div class="as-card"><div class="as-num">${fmt(stats.tests)}</div><div class="as-label">تست انجام‌شده</div></div>
+      <div class="as-card"><div class="as-num">${fmt(approved.length)}</div><div class="as-label">نظر تأیید‌شده</div></div>
+      <div class="as-card"><div class="as-num">${fmt(Object.keys(sessions).length)}</div><div class="as-label">مکالمات</div></div>
+      <div class="as-card"><div class="as-num">${fmt(Object.values(sessions).reduce((a,s)=>a+(s.messages?.length||0),0))}</div><div class="as-label">پیام‌های کل</div></div>
+      <button class="as-reset" onclick="resetStats()">⚠ ریست آمار بازدید</button>
+    </div>`;
+    return;
+  }
+
+  const list = currentTab === 'pending' ? pending : currentTab === 'approved' ? approved : rejected;
+  if (!list.length) {
+    body.innerHTML = `<div class="admin-empty"><div class="admin-empty-icon">📭</div>موردی وجود ندارد</div>`;
+    return;
+  }
+
+  const starStr = n => '★'.repeat(Math.max(0,n)) + '☆'.repeat(Math.max(0,5-n));
+  body.innerHTML = list.map(f => `
+    <div class="ac-card ac-${f.status}" id="acard_${f.id}">
+      <div class="ac-top">
+        <div class="ac-info">
+          <div class="ac-name">${f.name}</div>
+          <div class="ac-meta">
+            <span class="ac-stars">${starStr(f.stars)}</span>
+            <span class="ac-date">${f.date}</span>
+            <span class="ac-status ${f.status}">${f.status === 'pending' ? 'در انتظار' : f.status === 'approved' ? 'تأیید شده' : 'رد شده'}</span>
+          </div>
+        </div>
+      </div>
+      ${f.text ? `<div class="ac-text">${f.text}</div>` : '<div class="ac-text" style="opacity:0.4;font-style:italic">متنی ندارد</div>'}
+      <div class="ac-actions">
+        ${f.status !== 'approved' ? `<button class="ac-btn approve" onclick="setStatus(${f.id}, 'approved')">✓ تأیید</button>` : ''}
+        ${f.status !== 'rejected' ? `<button class="ac-btn reject"  onclick="setStatus(${f.id}, 'rejected')">✕ رد</button>` : ''}
+        ${f.status === 'rejected' || f.status === 'approved' ? `<button class="ac-btn" onclick="setStatus(${f.id}, 'pending')">↩ برگشت</button>` : ''}
+        <button class="ac-btn delete" onclick="deleteFeedback(${f.id})">🗑 حذف</button>
+      </div>
+    </div>`).join('');
+}
+
+function setStatus(id, status) {
+  const fbs = safeGet('dg_feedbacks') || [];
+  const f = fbs.find(x => x.id === id);
+  if (f) { f.status = status; safeSet('dg_feedbacks', fbs); }
+  renderAdminBody();
+  renderApprovedList();
+  renderStats();
+}
+
+function deleteFeedback(id) {
+  let fbs = safeGet('dg_feedbacks') || [];
+  fbs = fbs.filter(x => x.id !== id);
+  safeSet('dg_feedbacks', fbs);
+  renderAdminBody();
+  renderApprovedList();
+  renderStats();
+}
+
+function resetStats() {
+  if (!confirm('آمار بازدید ریست شود؟')) return;
+  safeSet('dg_stats', { total: 0, todayDate: new Date().toDateString(), todayCount: 0, tests: 0 });
+  renderAdminBody();
+  renderStats();
+}
+
+document.addEventListener('keydown', e => {
+  if (e.key === 'Escape') { closeModal(); closeAdminPanel(); }
+});
+
+// ── Q&A WITH PUTER.JS (free AI, works on GitHub Pages/Netlify, no API key needed) ──
+const QA_SYSTEM = `تو دستیار روانشناسی آکادمی درونگاه هستی — یک پلتفرم فارسی‌زبان برای خودشناسی و تست‌های روانشناسی.
+
+وظیفه‌ات:
+- پاسخ به سؤالات روانشناسی، روابط، اضطراب، افسردگی، عزت‌نفس، کار، و خودشناسی
+- کمک به کاربر برای فهمیدن احساسات و رفتارهایش
+- ارائه اطلاعات علمی روانشناسی به زبان ساده و فارسی روان
+- پیشنهاد تست‌های مرتبط از سایت: درونگرا/برونگرا، سبک دلبستگی، هوش هیجانی، اضطراب، عزت‌نفس، مهارت‌های ارتباطی، رهبری، خودشناسی، زبان عشق، سبک یادگیری
+
+قوانین:
+- پاسخ‌ها گرم، همدلانه و غیرقضاوتی باشند
+- هرگز تشخیص پزشکی یا بالینی ندهی — اگر نیاز جدی بود، توصیه کنی با متخصص مشورت کنند
+- پاسخ‌ها مختصر و مفید باشند
+- اگر سؤال مبهم بود، یک سؤال روشنگر بپرس
+- با مخاطب صمیمی باش ولی حرفه‌ای بمان`;
+
+let qaHistory = [];
+let qaLoading = false;
+let currentSessionId = null;
+let puterReady = false;
+
+// Load Puter.js dynamically
+(function loadPuter() {
+  const s = document.createElement('script');
+  s.src = 'https://js.puter.com/v2/';
+  s.onload = () => { puterReady = true; };
+  s.onerror = () => { puterReady = false; };
+  document.head.appendChild(s);
+})();
+
+function getOrCreateSession() {
+  if (!currentSessionId) currentSessionId = 'ses_' + Date.now();
+  return currentSessionId;
+}
+
+function saveQAMessage(role, text) {
+  const sid = getOrCreateSession();
+  const sessions = safeGet('dg_convos') || {};
+  if (!sessions[sid]) {
+    sessions[sid] = {
+      id: sid,
+      name: (document.getElementById('qaName')?.value || '').trim() || 'ناشناس',
+      date: new Date().toLocaleDateString('fa-IR'),
+      ts: Date.now(),
+      messages: []
+    };
+  }
+  const nameEl = document.getElementById('qaName');
+  if (nameEl && nameEl.value.trim()) sessions[sid].name = nameEl.value.trim();
+  sessions[sid].messages.push({ role, text, time: new Date().toLocaleTimeString('fa-IR') });
+  const keys = Object.keys(sessions).sort((a,b) => (sessions[b].ts||0)-(sessions[a].ts||0));
+  if (keys.length > 100) keys.slice(100).forEach(k => delete sessions[k]);
+  safeSet('dg_convos', sessions);
+  const b = document.getElementById('badgeConvos');
+  if (b) b.textContent = Object.keys(safeGet('dg_convos')||{}).length;
+}
+
+async function sendQA() {
+  const input = document.getElementById('qaInput');
+  const text = input.value.trim();
+  if (!text || qaLoading) return;
+
+  input.value = '';
+  input.style.height = 'auto';
+  addQAMsg('user', text);
+  saveQAMessage('user', text);
+  qaHistory.push({ role: 'user', content: text });
+
+  qaLoading = true;
+  document.getElementById('qaSend').disabled = true;
+  const typingId = addTyping();
+
+  try {
+    let reply = '';
+
+    if (puterReady && typeof puter !== 'undefined') {
+      // ── Use Puter.js (free, no API key, works on any static host) ──
+      const messages = [
+        { role: 'system', content: QA_SYSTEM },
+        ...qaHistory
+      ];
+      const response = await puter.ai.chat(messages, { model: 'claude-sonnet-4-5' });
+      reply = response?.message?.content?.[0]?.text
+           || response?.message?.content
+           || response?.text
+           || 'متأسفم، پاسخی دریافت نشد.';
+    } else {
+      // ── Fallback: smart offline responses ──
+      reply = offlineReply(text);
+    }
+
+    removeTyping(typingId);
+    addQAMsg('ai', reply);
+    saveQAMessage('ai', reply);
+    qaHistory.push({ role: 'assistant', content: reply });
+    if (qaHistory.length > 24) qaHistory = qaHistory.slice(-22);
+
+  } catch (e) {
+    removeTyping(typingId);
+    const fallback = offlineReply(text);
+    addQAMsg('ai', fallback);
+    saveQAMessage('ai', fallback);
+  }
+
+  qaLoading = false;
+  document.getElementById('qaSend').disabled = false;
+}
+
+function offlineReply(q) {
+  const lower = q.toLowerCase();
+  if (lower.includes('اضطراب') || lower.includes('نگران') || lower.includes('استرس'))
+    return 'اضطراب یکی از شایع‌ترین چالش‌های روانشناختی است. تنفس عمیق ۴-۷-۸ (دم ۴ ثانیه، نگه داشتن ۷ ثانیه، بازدم ۸ ثانیه) می‌تواند سریعاً کمک کند. پیشنهاد می‌کنم تست سطح اضطراب ما را هم امتحان کنی 🌿';
+  if (lower.includes('رابطه') || lower.includes('دوست') || lower.includes('عشق'))
+    return 'روابط سالم پایه‌ای‌ترین نیاز انسانی هستند. آیا می‌خواهی بدانی سبک دلبستگی تو چیست؟ این تست می‌تواند الگوهای روابط عاطفی‌ات را روشن کند 💛';
+  if (lower.includes('افسرد') || lower.includes('غم') || lower.includes('ناراحت'))
+    return 'احساس غم و افسردگی می‌تواند سنگین باشد. می‌خواهم بدانم بیشتر چه احساسی داری؟ اگر این احساس مدت زیادی ادامه دارد، مشاوره با یک متخصص می‌تواند بسیار مفید باشد 🌸';
+  if (lower.includes('کار') || lower.includes('شغل') || lower.includes('مدیر'))
+    return 'محیط کار می‌تواند چالش‌برانگیز باشد. تست هوش هیجانی در محیط کار و سبک رهبری ما می‌توانند نقاط قوت و رشد شما را نشان دهند 🎯';
+  if (lower.includes('خودم') || lower.includes('خودشناس') || lower.includes('شخصیت'))
+    return 'خودشناسی اولین قدم رشد شخصی است. از کجا می‌خواهی شروع کنی؟ تست‌های درونگرا/برونگرا و سطح خودشناسی ما می‌توانند آینه خوبی باشند 🪞';
+  return 'سؤال جالبیه! برای پاسخ دقیق‌تر، می‌تونی کمی بیشتر توضیح بدی؟ من اینجام تا کمک کنم 🌿';
+}
+
+function addQAMsg(role, text) {
+  const chat = document.getElementById('qaChat');
+  const div = document.createElement('div');
+  div.className = `qa-msg qa-msg-${role}`;
+  const av = role === 'ai' ? 'د' : '👤';
+  const formatted = text
+    .replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>')
+    .replace(/\n\n/g, '</p><p>')
+    .replace(/\n/g, '<br>');
+  div.innerHTML = `<div class="qa-avatar">${av}</div><div class="qa-bubble"><p>${formatted}</p></div>`;
+  chat.appendChild(div);
+  chat.scrollTo({ top: chat.scrollHeight, behavior: 'smooth' });
+}
+
+function addTyping() {
+  const chat = document.getElementById('qaChat');
+  const id = 'typing_' + Date.now();
+  const div = document.createElement('div');
+  div.className = 'qa-msg qa-msg-ai'; div.id = id;
+  div.innerHTML = `<div class="qa-avatar">د</div><div class="qa-bubble"><div class="qa-typing"><div class="qa-dot"></div><div class="qa-dot"></div><div class="qa-dot"></div></div></div>`;
+  chat.appendChild(div);
+  chat.scrollTo({ top: chat.scrollHeight, behavior: 'smooth' });
+  return id;
+}
+function removeTyping(id) { const el = document.getElementById(id); if (el) el.remove(); }
+function autoResize(el) { el.style.height = 'auto'; el.style.height = Math.min(el.scrollHeight, 160) + 'px'; }
+function qaKeyDown(e) { if (e.key === 'Enter' && !e.shiftKey) { e.preventDefault(); sendQA(); } }
+
+// ── ADMIN: CONVERSATIONS TAB ──
+function renderConvosTab() {
+  const sessions = safeGet('dg_convos') || {};
+  const body = document.getElementById('adminBody');
+  const list = Object.values(sessions).sort((a,b) => (b.ts||0)-(a.ts||0));
+
+  // Update badge
+  const b = document.getElementById('badgeConvos');
+  if (b) b.textContent = list.length;
+
+  if (!list.length) {
+    body.innerHTML = `<div class="admin-empty"><div class="admin-empty-icon">💬</div>هنوز مکالمه‌ای ثبت نشده</div>`;
+    return;
+  }
+
+  const exportBtn = `<div style="display:flex;justify-content:flex-end;margin-bottom:8px;gap:8px">
+    <button class="ac-btn" onclick="exportConvosCSV()" style="border-color:var(--gold-dim);color:var(--gold)">📥 دانلود CSV</button>
+    <button class="ac-btn delete" onclick="clearAllConvos()">🗑 پاک کردن همه</button>
+  </div>`;
+
+  const cards = list.map(s => {
+    const msgCount = s.messages?.length || 0;
+    const preview = s.messages?.find(m => m.role === 'user')?.text?.slice(0, 80) || '—';
+    return `<div class="ac-card" style="cursor:pointer" onclick="toggleConvo('convo_${s.id}')">
+      <div class="ac-top">
+        <div class="ac-info">
+          <div class="ac-name">${s.name}</div>
+          <div class="ac-meta">
+            <span class="ac-date">${s.date}</span>
+            <span class="ac-status pending">${msgCount} پیام</span>
+          </div>
+        </div>
+        <span style="color:var(--text-faint);font-size:18px" id="arr_${s.id}">›</span>
+      </div>
+      <div class="ac-text" style="opacity:0.6;font-size:12px">${preview}...</div>
+      <div id="convo_${s.id}" style="display:none;margin-top:8px;border-top:1px solid var(--border);padding-top:12px;display:none">
+        ${(s.messages||[]).map(m => `
+          <div style="display:flex;gap:8px;margin-bottom:10px;flex-direction:${m.role==='user'?'row-reverse':'row'};align-items:flex-start">
+            <div style="width:28px;height:28px;border-radius:50%;background:${m.role==='user'?'var(--gold)':'var(--cream-faint)'};display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:800;color:${m.role==='user'?'var(--black)':'var(--gold)'};flex-shrink:0">${m.role==='user'?'👤':'د'}</div>
+            <div style="background:var(--card);border:1px solid var(--border);border-radius:12px;padding:10px 14px;font-size:12px;color:var(--cream);line-height:1.7;max-width:85%;direction:rtl;text-align:right">${m.text?.replace(/\n/g,'<br>') || ''}</div>
+          </div>`).join('')}
+      </div>
+    </div>`;
+  }).join('');
+
+  body.innerHTML = exportBtn + cards;
+}
+
+function toggleConvo(id) {
+  const el = document.getElementById(id);
+  if (!el) return;
+  const isOpen = el.style.display !== 'none';
+  el.style.display = isOpen ? 'none' : 'block';
+  const sid = id.replace('convo_', '');
+  const arr = document.getElementById('arr_' + sid);
+  if (arr) arr.textContent = isOpen ? '›' : '‹';
+}
+
+function exportConvosCSV() {
+  const sessions = safeGet('dg_convos') || {};
+  const rows = [['نام', 'تاریخ', 'نقش', 'پیام', 'زمان']];
+  Object.values(sessions).sort((a,b) => (b.ts||0)-(a.ts||0)).forEach(s => {
+    (s.messages||[]).forEach(m => {
+      rows.push([
+        `"${(s.name||'').replace(/"/g,'""')}"`,
+        `"${s.date||''}"`,
+        m.role === 'user' ? 'کاربر' : 'دستیار',
+        `"${(m.text||'').replace(/"/g,'""').replace(/\n/g,' ')}"`,
+        `"${m.time||''}"`
+      ]);
+    });
+  });
+  const csv = '\uFEFF' + rows.map(r => r.join(',')).join('\n');
+  const blob = new Blob([csv], { type: 'text/csv;charset=utf-8;' });
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement('a');
+  a.href = url; a.download = `darongah_conversations_${new Date().toISOString().slice(0,10)}.csv`;
+  a.click(); URL.revokeObjectURL(url);
+}
+
+function clearAllConvos() {
+  if (!confirm('همه مکالمات پاک شوند؟')) return;
+  safeSet('dg_convos', {});
+  currentSessionId = null;
+  renderConvosTab();
+}
+
+renderCards();
+</script>
+</body>
+</html>
